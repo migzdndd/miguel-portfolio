@@ -1,190 +1,201 @@
 <!DOCTYPE html>
 
 <html data-theme="dark" lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+    <title>
         Miguel Riovaldez — Projects
     </title>
-<meta content="Projects by Miguel Riovaldez, including software development and Hytale server development." name="description"/>
-<meta content="Miguel Riovaldez — Projects" property="og:title"/>
-<meta content="A collection of projects involving software development, server development, databases, and web technologies." property="og:description"/>
-<meta content="website" property="og:type"/>
-<!-- ==========================================
+    <meta content="Projects by Miguel Riovaldez, including software development and Hytale server development."
+        name="description" />
+    <meta content="Miguel Riovaldez — Projects" property="og:title" />
+    <meta
+        content="A collection of projects involving software development, server development, databases, and web technologies."
+        property="og:description" />
+    <meta content="website" property="og:type" />
+    <!-- ==========================================
          FAVICON
          ========================================== -->
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0D12'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%2305A313' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" rel="icon"/>
-<!-- ==========================================
+    <link
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0D12'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%2305A313' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E"
+        rel="icon" />
+    <!-- ==========================================
          FONTS
          ========================================== -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<!-- ==========================================
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- ==========================================
          STYLES
          ========================================== -->
-<link href="css/style.css" rel="stylesheet"/>
-<style id="project-spacing">
+    <link href="css/style.css" rel="stylesheet" />
+    <style id="project-spacing">
         /* Separate featured projects visually */
-        .project-feature + .project-feature {
+        .project-feature+.project-feature {
             margin-top: 4rem;
         }
 
         @media (max-width: 768px) {
-            .project-feature + .project-feature {
+            .project-feature+.project-feature {
                 margin-top: 2.5rem;
             }
         }
     </style>
 </head>
+
 <body>
-<div id="pageTransition"></div>
-<!-- ==========================================
+    <div id="pageTransition"></div>
+    <!-- ==========================================
          CUSTOM CURSOR
          ========================================== -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-outline" id="cursorOutline">
-<span id="cursorText"></span>
-</div>
-<!-- ==========================================
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline">
+        <span id="cursorText"></span>
+    </div>
+    <!-- ==========================================
          BACKGROUND
          ========================================== -->
-<div aria-hidden="true" class="bg-glow"></div>
-<div aria-hidden="true" class="bg-grid"></div>
-<!-- ==========================================
+    <div aria-hidden="true" class="bg-glow"></div>
+    <div aria-hidden="true" class="bg-grid"></div>
+    <!-- ==========================================
          MOBILE NAVIGATION
          ========================================== -->
-<button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle">
-<span></span>
-<span></span>
-<span></span>
-</button>
-<!-- ==========================================
+    <button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <!-- ==========================================
          NAVIGATION
          ========================================== -->
-<nav aria-label="Primary" class="control-panel" id="controlPanel">
-<!-- Brand -->
-<div class="brand">
-<a data-cursor-text="HOME" href="index.html">
-<span>
+    <nav aria-label="Primary" class="control-panel" id="controlPanel">
+        <!-- Brand -->
+        <div class="brand">
+            <a data-cursor-text="HOME" href="index.html">
+                <span>
                     MR
                 </span>
-</a>
-<span aria-hidden="true" class="brand-dot"></span>
-</div>
-<!-- Navigation Links -->
-<ul class="nav-list" id="navList">
-<li>
-<a data-cursor-text="GO" data-page-link="home" href="index.html">
-<span class="n">01</span>
-<span class="l">
+            </a>
+            <span aria-hidden="true" class="brand-dot"></span>
+        </div>
+        <!-- Navigation Links -->
+        <ul class="nav-list" id="navList">
+            <li>
+                <a data-cursor-text="GO" data-page-link="home" href="index.html">
+                    <span class="n">01</span>
+                    <span class="l">
                         Home
                     </span>
-</a>
-</li>
-<li>
-<a data-cursor-text="GO" data-page-link="about" href="about.html">
-<span class="n">02</span>
-<span class="l">
+                </a>
+            </li>
+            <li>
+                <a data-cursor-text="GO" data-page-link="about" href="about.html">
+                    <span class="n">02</span>
+                    <span class="l">
                         About
                     </span>
-</a>
-</li>
-<li>
-<a data-cursor-text="GO" data-page-link="projects" href="projects.html">
-<span class="n">03</span>
-<span class="l">
+                </a>
+            </li>
+            <li>
+                <a data-cursor-text="GO" data-page-link="projects" href="projects.html">
+                    <span class="n">03</span>
+                    <span class="l">
                         Projects
                     </span>
-</a>
-</li>
-<li>
-<a data-cursor-text="GO" data-page-link="skills" href="skills.html">
-<span class="n">04</span>
-<span class="l">
+                </a>
+            </li>
+            <li>
+                <a data-cursor-text="GO" data-page-link="skills" href="skills.html">
+                    <span class="n">04</span>
+                    <span class="l">
                         Skills
                     </span>
-</a>
-</li>
+                </a>
+            </li>
 
-<li>
-<a data-cursor-text="GO" data-page-link="accomplishments" href="accomplishments.html">
-<span class="n">05</span>
-<span class="l">
+            <li>
+                <a data-cursor-text="GO" data-page-link="accomplishments" href="accomplishments.html">
+                    <span class="n">05</span>
+                    <span class="l">
                         Accomplishments
                     </span>
-</a>
-</li>
-<li>
-<a data-cursor-text="GO" data-page-link="beyond" href="beyond.html">
-<span class="n">06</span>
-<span class="l">
+                </a>
+            </li>
+            <li>
+                <a data-cursor-text="GO" data-page-link="beyond" href="beyond.html">
+                    <span class="n">06</span>
+                    <span class="l">
                         Beyond
                     </span>
-</a>
-</li>
-<li>
-<a data-cursor-text="GO" data-page-link="contact" href="contact.html">
-<span class="n">07</span>
-<span class="l">
+                </a>
+            </li>
+            <li>
+                <a data-cursor-text="GO" data-page-link="contact" href="contact.html">
+                    <span class="n">07</span>
+                    <span class="l">
                         Contact
                     </span>
-</a>
-</li>
-</ul>
-<!-- Navigation Footer -->
-<div class="nav-foot">
-<span class="loc">
+                </a>
+            </li>
+        </ul>
+        <!-- Navigation Footer -->
+        <div class="nav-foot">
+            <span class="loc">
                 PH · MNL
             </span>
-<button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">
+            <button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">
                 ◐
             </button>
-</div>
-</nav>
-<!-- ==========================================
+        </div>
+    </nav>
+    <!-- ==========================================
          PROJECTS PAGE
          ========================================== -->
-<main class="page-content">
-<section class="standalone-page" data-page="projects">
-<div class="page-inner">
-<!-- ======================================
+    <main class="page-content">
+        <section class="standalone-page" data-page="projects">
+            <div class="page-inner">
+                <!-- ======================================
                      PAGE HEADER
                      ====================================== -->
-<div class="page-head">
-<p class="eyebrow">03 / Projects</p>
-<h2>
+                <div class="page-head">
+                    <p class="eyebrow">03 / Projects</p>
+                    <h2>
                         What I've built.
                     </h2>
-</div>
-<!-- ======================================
+                </div>
+                <!-- ======================================
                      PROJECT 01
                      MFC YOUTH AREA MANAGEMENT SYSTEM
                      ====================================== -->
-<article aria-label="Open MFC Youth Area Management System project details" class="project-feature magnetic" data-project-id="mfc-youth" data-project-clickable="true" data-project-open="true" id="projectCard" tabindex="0">
-<!-- Project Header -->
-<div class="pf-top">
-<span class="pf-status">
-<span aria-hidden="true" class="dot"></span>
+                <article aria-label="Open MFC Youth Area Management System project details"
+                    class="project-feature magnetic" data-project-id="mfc-youth" data-project-clickable="true"
+                    data-project-open="true" id="projectCard" tabindex="0">
+                    <!-- Project Header -->
+                    <div class="pf-top">
+                        <span class="pf-status">
+                            <span aria-hidden="true" class="dot"></span>
 
                             Completed · Software Development
 
                         </span>
-<span class="tag tag-static">
-                            01 / 02
+                        <span class="tag tag-static">
+                            01 / 03
                         </span>
-</div>
-<!-- Project Title -->
-<h3 class="pf-title">
+                    </div>
+                    <!-- Project Title -->
+                    <h3 class="pf-title">
 
-                        MFC Youth Area<br/>
+                        MFC Youth Area<br />
 
                         Management System
 
                     </h3>
-<!-- Project Description -->
-<p class="pf-desc">
+                    <!-- Project Description -->
+                    <p class="pf-desc">
 
                         An offline desktop application designed to help
                         Missionary Families of Christ (MFC) Youth areas
@@ -192,71 +203,75 @@
                         assignments through a centralized local database.
 
                     </p>
-<!-- Technologies -->
-<div class="pf-tags">
-<span class="tag">
+                    <!-- Technologies -->
+                    <div class="pf-tags">
+                        <span class="tag">
                             C#
                         </span>
-<span class="tag">
+                        <span class="tag">
                             Windows Forms
                         </span>
-<span class="tag">
+                        <span class="tag">
                             SQLite
                         </span>
-<span class="tag">
+                        <span class="tag">
                             Git
                         </span>
-<span class="tag">
+                        <span class="tag">
                             GitHub
                         </span>
-<span class="tag">
+                        <span class="tag">
                             Inno Setup
                         </span>
-</div>
-<!-- Project Actions -->
-<div class="pf-actions">
-<button class="btn btn-primary magnetic" data-cursor-text="OPEN" data-project-open="mfc-youth" id="viewProjectBtn">
+                    </div>
+                    <!-- Project Actions -->
+                    <div class="pf-actions">
+                        <button class="btn btn-primary magnetic" data-cursor-text="OPEN" data-project-open="mfc-youth"
+                            id="viewProjectBtn">
 
                             View Project
 
                             <span class="arrow">
                                 →
                             </span>
-</button>
-<a class="btn btn-ghost magnetic" data-cursor-text="OPEN" href="https://github.com/migzdndd/MFC-Youth-Area-Management-System" rel="noopener noreferrer" target="_blank">
+                        </button>
+                        <a class="btn btn-ghost magnetic" data-cursor-text="OPEN"
+                            href="https://github.com/migzdndd/MFC-Youth-Area-Management-System"
+                            rel="noopener noreferrer" target="_blank">
 
                             GitHub ↗
 
                         </a>
-</div>
-</article>
-<!-- ======================================
+                    </div>
+                </article>
+                <!-- ======================================
                      PROJECT 02
                      MYTALE ASIA
                      ====================================== -->
-<article aria-label="Open MyTale Asia Hytale Development project details" class="project-feature" data-project-id="mytale-asia" data-project-clickable="true" data-project-open="true" tabindex="0">
-<!-- Project Header -->
-<div class="pf-top">
-<span class="pf-status">
-<span aria-hidden="true" class="dot"></span>
+                <article aria-label="Open MyTale Asia Hytale Development project details" class="project-feature"
+                    data-project-id="mytale-asia" data-project-clickable="true" data-project-open="true" tabindex="0">
+                    <!-- Project Header -->
+                    <div class="pf-top">
+                        <span class="pf-status">
+                            <span aria-hidden="true" class="dot"></span>
 
                             Completed · Server Development
 
                         </span>
-<span class="tag tag-static">
-                            02 / 02
+                        <span class="tag tag-static">
+                            02 / 03
                         </span>
-</div>
-<!-- Project Title -->
-<h3 class="pf-title">
+                    </div>
+                    <!-- Project Title -->
+                    <h3 class="pf-title">
 
-                        MyTale Asia<br/>
+                        MyTale Asia<br />
 
                         Hytale Development
 
                     </h3>
-<!-- Project Description -->
-<p class="pf-desc">
+                    <!-- Project Description -->
+                    <p class="pf-desc">
 
                         Hytale server development project for MyTale Asia,
                         involving server-side development, mods, plugins,
@@ -264,54 +279,120 @@
                         Git, and GitHub.
 
                     </p>
-<!-- Technologies -->
-<div class="pf-tags">
-<span class="tag">
+                    <!-- Technologies -->
+                    <div class="pf-tags">
+                        <span class="tag">
                             Java
                         </span>
-<span class="tag">
+                        <span class="tag">
                             Git
                         </span>
-<span class="tag">
+                        <span class="tag">
                             GitHub
                         </span>
-<span class="tag">
+                        <span class="tag">
                             OpenAI
                         </span>
-</div>
-<!-- Project Actions -->
-<div class="pf-actions">
-<button class="btn btn-primary magnetic" data-cursor-text="OPEN" data-project-open="mytale-asia" type="button">View Project <span class="arrow">→</span></button>
-<a class="btn btn-ghost magnetic" data-cursor-text="OPEN" href="https://github.com/Xerain556/MyTale-Asia-Development" rel="noopener noreferrer" target="_blank">
+                    </div>
+                    <!-- Project Actions -->
+                    <div class="pf-actions">
+                        <button class="btn btn-primary magnetic" data-cursor-text="OPEN" data-project-open="mytale-asia"
+                            type="button">View Project <span class="arrow">→</span></button>
+                        <a class="btn btn-ghost magnetic" data-cursor-text="OPEN"
+                            href="https://github.com/Xerain556/MyTale-Asia-Development" rel="noopener noreferrer"
+                            target="_blank">
 
                             GitHub ↗
 
                         </a>
-</div>
-</article>
-<!-- ======================================
+                    </div>
+                </article>
+                <!-- ======================================
+                     PROJECT 03
+                     THIS WEBPAGE
+                     ====================================== -->
+                <article aria-label="Open This Webpage portfolio project details" class="project-feature"
+                    data-project-id="this-webpage" data-project-clickable="true" data-project-open="true" tabindex="0">
+                    <div class="pf-top">
+                        <span class="pf-status">
+                            <span aria-hidden="true" class="dot"></span>
+
+                            Completed · Web Development
+
+                        </span>
+                        <span class="tag tag-static">
+                            03 / 03
+                        </span>
+                    </div>
+                    <h3 class="pf-title">
+
+                        This Webpage<br />
+
+                        Portfolio Website
+
+                    </h3>
+                    <p class="pf-desc">
+
+                        The portfolio website itself, built as a responsive
+                        multi-page website to showcase my projects, skills,
+                        accomplishments, interests, and contact information.
+
+                    </p>
+                    <div class="pf-tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Google Fonts</span>
+                        <span class="tag">Responsive Design</span>
+                        <span class="tag">LocalStorage</span>
+                    </div>
+                    <div class="pf-actions">
+                        <button class="btn btn-primary magnetic" data-cursor-text="OPEN"
+                            data-project-open="this-webpage" type="button">
+
+                            View Project
+
+                            <span class="arrow">
+                                →
+                            </span>
+                        </button>
+                        <a class="btn btn-ghost magnetic" data-cursor-text="OPEN" href="index.html"
+                            rel="noopener noreferrer" target="_blank">
+
+                            View Website ↗
+
+                        </a>
+                    </div>
+                </article>
+                <!-- ======================================
                      PROJECT NOTE
                      ====================================== -->
-<p class="projects-note">
+                <p class="projects-note">
 
-                    Two projects currently featured —
+                    Three projects currently featured —
                     more will be added here as they're completed.
 
                 </p>
-</div>
-</section>
-</main>
-<!-- ==========================================
+            </div>
+        </section>
+    </main>
+    <!-- ==========================================
          PROJECT DETAILS MODAL
          ========================================== -->
-<div aria-hidden="true" aria-label="Project details" aria-modal="true" class="modal-overlay" id="projectModal" role="dialog">
-<div class="modal-panel"><button aria-label="Close project details" class="modal-close" data-cursor-text="CLOSE" id="modalClose">
+    <div aria-hidden="true" aria-label="Project details" aria-modal="true" class="modal-overlay" id="projectModal"
+        role="dialog">
+        <div class="modal-panel"><button aria-label="Close project details" class="modal-close" data-cursor-text="CLOSE"
+                id="modalClose">
                 ✕
-            </button><h3 id="projectModalTitle"></h3><div id="projectModalBody"></div></div>
-</div>
-<!-- ==========================================
+            </button>
+            <h3 id="projectModalTitle"></h3>
+            <div id="projectModalBody"></div>
+        </div>
+    </div>
+    <!-- ==========================================
          JAVASCRIPT
          ========================================== -->
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
