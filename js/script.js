@@ -1079,7 +1079,7 @@
       link.href = project.link;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      link.textContent = "View on GitHub ↗";
+      link.textContent = project.linkLabel || "View on GitHub ↗";
       actions.appendChild(link);
       body.appendChild(actions);
     }
