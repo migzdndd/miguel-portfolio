@@ -927,11 +927,13 @@
           { heading: "Features", list: ["Members management", "Chapters management", "Services management & assignments", "Dashboard & statistics", "Search & refresh", "Member relationships", "Local SQLite database", "Packaged Windows installer"] },
           { heading: "Technologies", tags: ["C#", "Windows Forms", "SQLite", "Git", "GitHub", "Inno Setup"] },
           { heading: "What I Learned", list: ["Structuring a multi-form Windows desktop application in C#", "Designing and querying a local relational database with SQLite", "Packaging and distributing a desktop app with Inno Setup", "Managing a real project's history with Git and GitHub"] },
-          { heading: "Architecture", architecture: [
-            ["User Interface", "Windows Forms screens for members, chapters, services, and the dashboard."],
-            ["Application Logic", "C# handles data flow, validation, and assignment relationships between screens."],
-            ["Database", "Local SQLite database stores members, chapters, and service records."]
-          ]}
+          {
+            heading: "Architecture", architecture: [
+              ["User Interface", "Windows Forms screens for members, chapters, services, and the dashboard."],
+              ["Application Logic", "C# handles data flow, validation, and assignment relationships between screens."],
+              ["Database", "Local SQLite database stores members, chapters, and service records."]
+            ]
+          }
         ],
         link: "https://github.com/migzdndd/MFC-Youth-Area-Management-System"
       },
@@ -943,6 +945,57 @@
           { heading: "Technologies", tags: ["Java", "Git", "GitHub", "OpenAI"] }
         ],
         link: "https://github.com/Xerain556/MyTale-Asia-Development"
+      },
+      "this-webpage": {
+        title: "This Webpage — Portfolio Website",
+        sections: [
+          {
+            heading: "Overview",
+            text: "The portfolio website itself, built as a responsive multi-page website to showcase projects, skills, accomplishments, interests, and contact information."
+          },
+          {
+            heading: "Features",
+            list: [
+              "Multi-page navigation",
+              "Responsive design for desktop and mobile",
+              "Dark and light theme toggle",
+              "Custom cursor and magnetic interactions",
+              "Page transition and sequential reveal animations",
+              "Interactive project modal",
+              "Skills category tabs",
+              "Networking visualization",
+              "Accomplishments accordion",
+              "Local theme preference storage"
+            ]
+          },
+          {
+            heading: "Technologies",
+            tags: [
+              "HTML5",
+              "CSS3",
+              "JavaScript",
+              "Google Fonts",
+              "Responsive Design",
+              "LocalStorage"
+            ]
+          },
+          {
+            heading: "JavaScript Uses",
+            list: [
+              "Theme switching with localStorage",
+              "Mobile navigation",
+              "Custom cursor interactions",
+              "Magnetic buttons and links",
+              "Page transitions",
+              "Sequential content reveals",
+              "Project details modal",
+              "Skills and networking interactions",
+              "Accomplishments accordion"
+            ]
+          }
+        ],
+        link: "index.html",
+        linkLabel: "View Website ↗"
       }
     };
 
