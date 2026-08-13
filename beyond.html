@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Miguel Riovaldez — Beyond the Code</title>
+<meta content="Life beyond development — gaming, music, content creation, and graphic design." name="description"/>
+<meta content="Miguel Riovaldez — Beyond the Code" property="og:title"/>
+<meta content="The interests and creative pursuits that exist beyond software development." property="og:description"/>
+<meta content="website" property="og:type"/>
+<!-- ==========================================
+       FAVICON
+       ========================================== -->
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B0D12'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%2305A313' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" rel="icon"/>
+<!-- ==========================================
+       FONTS
+       ========================================== -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- ==========================================
+       STYLES
+       ========================================== -->
+<link href="css/style.css" rel="stylesheet"/>
+<style>
+
+    /* ==========================================
+       BEYOND DETAIL MODAL
+       ========================================== */
+
+    .beyond-card-button {
+      width: 100%;
+      border: 0;
+      font: inherit;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .beyond-card-button:focus-visible {
+      outline: 2px solid var(--accent, #05A313);
+      outline-offset: 4px;
+    }
+
+    .beyond-detail-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: rgba(5, 7, 11, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+    }
+
+    .beyond-detail-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .beyond-detail {
+      position: relative;
+      width: min(920px, 100%);
+      max-height: min(820px, 90vh);
+      overflow-y: auto;
+      padding: clamp(28px, 5vw, 52px);
+      background: rgba(11, 13, 18, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .beyond-detail-overlay.is-open .beyond-detail {
+      transform: translateY(0) scale(1);
+    }
+
+    .beyond-detail-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: inherit;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .beyond-detail-close:hover {
+      background: rgba(255, 255, 255, 0.09);
+      transform: rotate(90deg);
+    }
+
+    .beyond-detail-head {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .beyond-detail-icon {
+      font-size: clamp(42px, 6vw, 64px);
+      line-height: 1;
+    }
+
+    .beyond-detail-head .sub {
+      display: block;
+      margin-bottom: 5px;
+      opacity: 0.6;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .beyond-detail-head h3 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+    }
+
+    .beyond-placeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .beyond-placeholder {
+      min-height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.025);
+      color: rgba(255, 255, 255, 0.42);
+      font-family: "Space Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .beyond-detail-copy {
+      max-width: 760px;
+    }
+
+    .beyond-detail-copy p {
+      margin: 0;
+      line-height: 1.8;
+      opacity: 0.78;
+    }
+
+    .game-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .game-tab {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.035);
+      color: inherit;
+      padding: 11px 16px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .game-tab:hover,
+    .game-tab.is-active {
+      background: rgba(5, 163, 19, 0.14);
+      border-color: rgba(5, 163, 19, 0.55);
+    }
+
+    .game-panel {
+      display: none;
+    }
+
+    .game-panel.is-active {
+      display: block;
+      animation: beyondPanelIn 0.3s ease both;
+    }
+
+    .game-panel h4 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .game-panel p {
+      margin: 0;
+      max-width: 720px;
+      line-height: 1.8;
+      opacity: 0.76;
+    }
+
+    .game-panel-note {
+      margin-top: 18px !important;
+      padding-left: 16px;
+      border-left: 2px solid rgba(5, 163, 19, 0.55);
+    }
+
+    @keyframes beyondPanelIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .beyond-detail-overlay {
+        padding: 14px;
+      }
+
+      .beyond-detail {
+        max-height: 94vh;
+        padding: 28px 20px;
+      }
+
+      .beyond-placeholder-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .beyond-placeholder {
+        min-height: 160px;
+      }
+
+      .beyond-detail-head {
+        padding-right: 40px;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+<div id="pageTransition"></div>
+<!-- ==========================================
+       CUSTOM CURSOR
+       ========================================== -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-outline" id="cursorOutline">
+<span id="cursorText"></span>
+</div>
+<!-- ==========================================
+       BACKGROUND
+       ========================================== -->
+<div aria-hidden="true" class="bg-glow"></div>
+<div aria-hidden="true" class="bg-grid"></div>
+<!-- ==========================================
+       MOBILE NAVIGATION
+       ========================================== -->
+<button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+<nav aria-label="Primary" class="control-panel" id="controlPanel">
+<!-- Brand -->
+<div class="brand">
+<a href="index.html">
+<span>
+          MR
+        </span>
+</a>
+<span aria-hidden="true" class="brand-dot"></span>
+</div>
+<!-- Navigation -->
+<ul class="nav-list" id="navList">
+<!-- 01 Home -->
+<li>
+<a data-page-link="home" href="index.html">
+<span class="n">01</span>
+<span class="l">
+            Home
+          </span>
+</a>
+</li>
+<!-- 02 About -->
+<li>
+<a data-page-link="about" href="about.html">
+<span class="n">02</span>
+<span class="l">
+            About
+          </span>
+</a>
+</li>
+<!-- 03 Projects -->
+<li>
+<a data-page-link="projects" href="projects.html">
+<span class="n">03</span>
+<span class="l">
+            Projects
+          </span>
+</a>
+</li>
+<!-- 04 Skills -->
+<li>
+<a data-page-link="skills" href="skills.html">
+<span class="n">04</span>
+<span class="l">
+            Skills
+          </span>
+</a>
+</li>
+<!-- 05 Networking -->
+
+<!-- 06 Accomplishments -->
+<li>
+<a data-page-link="accomplishments" href="accomplishments.html">
+<span class="n">05</span>
+<span class="l">
+            Accomplishments
+          </span>
+</a>
+</li>
+<!-- 07 Beyond -->
+<li>
+<a data-page-link="beyond" href="beyond.html">
+<span class="n">06</span>
+<span class="l">
+            Beyond
+          </span>
+</a>
+</li>
+<!-- 08 Contact -->
+<li>
+<a data-page-link="contact" href="contact.html">
+<span class="n">07</span>
+<span class="l">
+            Contact
+          </span>
+</a>
+</li>
+</ul>
+<!-- Navigation Footer -->
+<div class="nav-foot">
+<span class="loc">
+        PH · MNL
+      </span>
+<button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">
+        ◐
+      </button>
+</div>
+</nav>
+<!-- ==========================================
+       BEYOND THE CODE PAGE
+       ========================================== -->
+<main class="page-content">
+<section class="standalone-page" data-page="beyond">
+<div class="page-inner">
+<!-- ======================================
+             PAGE HEADER
+             ====================================== -->
+<div class="page-head">
+<p class="eyebrow">
+            07 / Beyond the Code
+          </p>
+<h2>
+            Life Beyond Development
+          </h2>
+</div>
+<!-- ======================================
+             BEYOND GRID
+             ====================================== -->
+<div class="beyond-grid">
+<!-- ====================================
+               GUITAR
+               ==================================== -->
+<button aria-label="Open Guitar details" class="beyond-card beyond-card-button" data-beyond-open="guitar" type="button">
+<span aria-hidden="true" class="beyond-icon beyond-svg-icon"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14.5 4.5 19.5 0l1 1-4.5 5M13 6l5 5M7.5 16.5 3 21l-1-1 4.5-4.5M8 14l2 2M5.5 10.5a4 4 0 1 0 5.7 5.7l2.3-2.3a4 4 0 0 0-5.7-5.7z"></path></svg></span>
+<span class="sub">
+              Music
+            </span>
+<h4>
+              Guitar
+            </h4>
+<p>
+              An interest in playing guitar, music theory,
+              and continuing to develop musical ability.
+            </p>
+</button>
+<!-- ====================================
+               GAMING
+               ==================================== -->
+<button aria-label="Open Gaming details" class="beyond-card beyond-card-button" data-beyond-open="gaming" type="button">
+<span aria-hidden="true" class="beyond-icon beyond-svg-icon"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M7 7h10a5 5 0 0 1 4.7 6.8l-1.1 3.1a2.5 2.5 0 0 1-4.5.5l-1.2-1.8H9.1l-1.2 1.8a2.5 2.5 0 0 1-4.5-.5l-1.1-3.1A5 5 0 0 1 7 7zM8 11v4M6 13h4M16 12h.01M18 14h.01"></path></svg></span>
+<span class="sub">
+              Gaming
+            </span>
+<h4>
+              Gaming
+            </h4>
+<p>
+              Exploring different games and experiences
+              across competitive, open-world, and sandbox titles.
+            </p>
+</button>
+<!-- ====================================
+               CREATIVE
+               ==================================== -->
+<button aria-label="Open Content and Design details" class="beyond-card beyond-card-button" data-beyond-open="creative" type="button">
+<span aria-hidden="true" class="beyond-icon beyond-svg-icon"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18h1.2a2 2 0 0 0 1.4-3.4 1.7 1.7 0 0 1 1.2-2.9H18a3 3 0 0 0 3-3A9 9 0 0 0 12 3zM7.5 11h.01M9 7.5h.01M14 7.5h.01M16.5 11h.01"></path></svg></span>
+<span class="sub">
+              Creative Explorer
+            </span>
+<h4>
+              Content &amp; Design
+            </h4>
+<p>
+              Exploring graphic design and visual content
+              while continuing to develop creative skills.
+            </p>
+</button>
+</div>
+</div>
+</section>
+<!-- ==========================================
+         BEYOND DETAIL OVERLAY
+         ========================================== -->
+<div aria-hidden="true" class="beyond-detail-overlay" id="beyondDetailOverlay">
+<div aria-labelledby="beyondDetailTitle" aria-modal="true" class="beyond-detail" role="dialog">
+<button aria-label="Close details" class="beyond-detail-close" id="beyondDetailClose" type="button">
+          ×
+        </button>
+<!-- Guitar -->
+<div class="beyond-detail-content" data-beyond-content="guitar" hidden="">
+<div class="beyond-detail-head">
+<span aria-hidden="true" class="beyond-detail-icon">
+              🎸
+            </span>
+<div>
+<span class="sub">
+                Music
+              </span>
+<h3 id="beyondDetailTitle">
+                Guitar
+              </h3>
+</div>
+</div>
+<div class="beyond-placeholder-grid">
+<div class="beyond-placeholder">
+              Image Placeholder
+            </div>
+<div class="beyond-placeholder">
+              Image Placeholder
+            </div>
+</div>
+<div class="beyond-detail-copy">
+<p>
+              I also have an interest in playing musical instruments,
+              with the guitar being my primary focus. Beyond playing,
+              I enjoy exploring music theory and understanding the
+              fundamentals behind melodies, chords, rhythm, and
+              composition. It is an area where I continue to learn
+              and develop my abilities over time.
+            </p>
+</div>
+</div>
+<!-- Gaming -->
+<div class="beyond-detail-content" data-beyond-content="gaming" hidden="">
+<div class="beyond-detail-head">
+<span aria-hidden="true" class="beyond-detail-icon">
+              🎮
+            </span>
+<div>
+<span class="sub">
+                Gaming
+              </span>
+<h3 id="beyondGamingTitle">
+                Games I Play
+              </h3>
+</div>
+</div>
+<div class="game-tabs">
+<button class="game-tab is-active" data-game-tab="valorant" type="button">
+              VALORANT
+            </button>
+<button class="game-tab" data-game-tab="fivem" type="button">
+              FiveM
+            </button>
+<button class="game-tab" data-game-tab="hytale" type="button">
+              Hytale
+            </button>
+<button class="game-tab" data-game-tab="gtav" type="button">
+              GTA V
+            </button>
+</div>
+<div class="game-panels">
+<div class="game-panel is-active" data-game-panel="valorant">
+<h4>
+                VALORANT
+              </h4>
+<p>
+                A competitive tactical shooter that I enjoy for
+                its combination of strategy, teamwork, and
+                mechanical skill.
+              </p>
+</div>
+<div class="game-panel" data-game-panel="fivem">
+<h4>
+                FiveM
+              </h4>
+<p>
+                A multiplayer modification platform for GTA V
+                that offers a variety of community-created
+                experiences and servers.
+              </p>
+</div>
+<div class="game-panel" data-game-panel="hytale">
+<h4>
+                Hytale
+              </h4>
+<p>
+                A sandbox adventure game that combines
+                exploration, building, and RPG-style elements.
+              </p>
+<p class="game-panel-note">
+                I have also had experience developing a Hytale
+                server alongside friends, exploring the technical
+                and creative aspects of running a custom server.
+              </p>
+</div>
+<div class="game-panel" data-game-panel="gtav">
+<h4>
+                GTA V
+              </h4>
+<p>
+                An open-world game known for its exploration,
+                vehicles, missions, and broad range of gameplay
+                experiences.
+              </p>
+</div>
+</div>
+</div>
+<!-- Content & Design -->
+<div class="beyond-detail-content" data-beyond-content="creative" hidden="">
+<div class="beyond-detail-head">
+<span aria-hidden="true" class="beyond-detail-icon">
+              🎨
+            </span>
+<div>
+<span class="sub">
+                Creative Explorer
+              </span>
+<h3 id="beyondCreativeTitle">
+                Content &amp; Design
+              </h3>
+</div>
+</div>
+<div class="beyond-placeholder-grid">
+<div class="beyond-placeholder">
+              Image Placeholder
+            </div>
+<div class="beyond-placeholder">
+              Image Placeholder
+            </div>
+</div>
+<div class="beyond-detail-copy">
+<p>
+              I also have an interest in graphic design and visual
+              content creation. While I am still developing my skills
+              in this area, I enjoy experimenting with different styles,
+              layouts, and creative ideas. I am always open to learning
+              and improving as I explore more aspects of design.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+<script>
+
+    /* ==========================================
+       BEYOND DETAIL INTERACTIONS
+       ========================================== */
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const overlay = document.getElementById("beyondDetailOverlay");
+      const closeButton = document.getElementById("beyondDetailClose");
+      const cards = document.querySelectorAll("[data-beyond-open]");
+      const contents = document.querySelectorAll("[data-beyond-content]");
+
+      if (!overlay) return;
+
+      let lastFocusedElement = null;
+
+
+      function openBeyondDetail(name) {
+
+        lastFocusedElement = document.activeElement;
+
+        contents.forEach((content) => {
+          content.hidden = content.dataset.beyondContent !== name;
+        });
+
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+
+        requestAnimationFrame(() => {
+          closeButton.focus();
+        });
+
+      }
+
+
+      function closeBeyondDetail() {
+
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+
+      }
+
+
+      cards.forEach((card) => {
+
+        card.addEventListener("click", () => {
+          openBeyondDetail(card.dataset.beyondOpen);
+        });
+
+      });
+
+
+      closeButton.addEventListener("click", closeBeyondDetail);
+
+
+      overlay.addEventListener("click", (event) => {
+
+        if (event.target === overlay) {
+          closeBeyondDetail();
+        }
+
+      });
+
+
+      document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape" && overlay.classList.contains("is-open")) {
+          closeBeyondDetail();
+        }
+
+      });
+
+
+      /* Gaming tabs */
+
+      const gameTabs = document.querySelectorAll("[data-game-tab]");
+      const gamePanels = document.querySelectorAll("[data-game-panel]");
+
+      gameTabs.forEach((tab) => {
+
+        tab.addEventListener("click", () => {
+
+          const game = tab.dataset.gameTab;
+
+          gameTabs.forEach((item) => {
+            item.classList.toggle(
+              "is-active",
+              item === tab
+            );
+          });
+
+          gamePanels.forEach((panel) => {
+            panel.classList.toggle(
+              "is-active",
+              panel.dataset.gamePanel === game
+            );
+          });
+
+        });
+
+      });
+
+    });
+
+  </script>
+<script src="js/script.js"></script>
+</body>
+</html>
