@@ -25,6 +25,18 @@
          STYLES
          ========================================== -->
 <link href="css/style.css" rel="stylesheet"/>
+<style id="project-spacing">
+        /* Separate featured projects visually */
+        .project-feature + .project-feature {
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-feature + .project-feature {
+                margin-top: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 <div id="pageTransition"></div>
