@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Replace the domain below with your real deployed URL once the site is live
+# (e.g. https://migzdndd.github.io/ if hosted on GitHub Pages)
+Sitemap: https://migzdndd.github.io/miguel-portfolio/sitemap.xml

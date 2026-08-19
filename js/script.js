@@ -1236,18 +1236,18 @@
      */
     var skillsData = {
       development: [
-        { name: "C#", lvl: "Novice - Learning" },
+        { name: "C#", lvl: "Learning" },
         { name: "C++", lvl: "Intermediate" },
-        { name: "Python", lvl: "Novice" },
-        { name: "Java", lvl: "Novice - Learning" },
-        { name: "JavaScript", lvl: "Novice - Learning" }
+        { name: "Python", lvl: "Learning" },
+        { name: "Java", lvl: "Learning" },
+        { name: "JavaScript", lvl: "Learning" }
       ],
       networking: [
-        { name: "IPv4", lvl: "Novice - Learning" },
-        { name: "IPv6", lvl: "Novice - Learning" },
-        { name: "Subnetting", lvl: "Novice - Learning" },
-        { name: "Data Comm. & Networking Fundamentals", lvl: "Novice - Learning" },
-        { name: "Cisco Packet Tracer", lvl: "Novice - Learning" }
+        { name: "IPv4", lvl: "Learning" },
+        { name: "IPv6", lvl: "Learning" },
+        { name: "Subnetting", lvl: "Learning" },
+        { name: "Data Comm. & Networking Fundamentals", lvl: "Learning" },
+        { name: "Cisco Packet Tracer", lvl: "Learning" }
       ],
       database: [
         { name: "SQLite", lvl: "Learning" },
@@ -1255,17 +1255,17 @@
         { name: "MySQL / DB Management", lvl: "Learning" }
       ],
       web: [
-        { name: "HTML", lvl: "Novice - Learning" },
-        { name: "CSS", lvl: "Novice - Learning" },
-        { name: "JavaScript", lvl: "Novice - Learning" },
-        { name: "Responsive Web Design", lvl: "Novice - Learning" }
+        { name: "HTML", lvl: "Learning" },
+        { name: "CSS", lvl: "Learning" },
+        { name: "JavaScript", lvl: "Learning" },
+        { name: "Responsive Web Design", lvl: "Learning" }
       ],
       creative: [
-        { name: "Canva", lvl: "Novice - Learning" },
-        { name: "UI/UX", lvl: "Novice - Learning" },
-        { name: "Graphic Design", lvl: "Novice - Learning" },
-        { name: "Digital Design", lvl: "Novice - Learning" },
-        { name: "Content Creation", lvl: "Novice - Learning" }
+        { name: "Canva", lvl: "Learning" },
+        { name: "UI/UX", lvl: "Learning" },
+        { name: "Graphic Design", lvl: "Learning" },
+        { name: "Digital Design", lvl: "Learning" },
+        { name: "Content Creation", lvl: "Learning" }
       ]
     };
 
@@ -1620,7 +1620,7 @@
 
       ".page-head .eyebrow",
 
-      ".page-head h2",
+      ".page-head h1",
 
 
       /* ==============================

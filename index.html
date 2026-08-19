@@ -11,6 +11,14 @@
 <meta content="Miguel Riovaldez — BSIT Student · Aspiring Full Stack Developer" property="og:title"/>
 <meta content="Learning through building. A 2nd Year BSIT student at Mapúa University exploring software development, networking, and web technologies." property="og:description"/>
 <meta content="website" property="og:type"/>
+<meta content="index.html" property="og:url"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Miguel Riovaldez — BSIT Student · Aspiring Full Stack Developer" name="twitter:title"/>
+<meta content="Learning through building. A 2nd Year BSIT student at Mapúa University exploring software development, networking, and web technologies." name="twitter:description"/>
+<meta content="#05A313" media="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="#F3F4F7" media="(prefers-color-scheme: light)" name="theme-color"/>
+<!-- Replace the placeholder in <link rel="canonical"> below with the site's real deployed URL once hosted -->
+<link href="index.html" rel="canonical"/>
 <!-- ==========================================
        FAVICON
        ========================================== -->
@@ -25,8 +33,29 @@
        STYLES
        ========================================== -->
 <link href="css/style.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Miguel Riovaldez",
+  "url": "index.html",
+  "jobTitle": "BSIT Student",
+  "description": "2nd Year BSIT student at Mapúa University aspiring to become a Full Stack Developer.",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Mapúa University"
+  },
+  "email": "mailto:miguelcriovaldez@gmail.com",
+  "sameAs": [
+    "https://github.com/migzdndd",
+    "https://www.instagram.com/migzdnd/",
+    "https://www.facebook.com/migzdndd/"
+  ]
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div id="pageTransition"></div>
 <!-- ==========================================
        LOADER
@@ -146,7 +175,7 @@
 <!-- ==========================================
        HOME PAGE
        ========================================== -->
-<main class="page-content">
+<main class="page-content" id="main-content" tabindex="-1">
 <section class="page-shell" data-page="home">
 <!-- Background Nodes -->
 <div aria-hidden="true" class="hero-nodes" id="heroNodes"></div>
@@ -179,8 +208,10 @@
         </p>
 <p class="hero-bio">
 
-          BSIT Student aspiring to become a Full Stack Developer.
-          Loves gaming and playing instruments whenever I have free time.
+          Right now that means building small real projects, getting
+          comfortable with C#, SQL, and JavaScript, and picking up
+          networking fundamentals along the way. Outside of that,
+          you'll usually find me gaming or playing guitar.
 
         </p>
 <!-- CTA -->
