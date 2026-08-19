@@ -1292,10 +1292,11 @@
 
         skillsData[category].forEach(function (skill) {
           var card = document.createElement("div");
-          card.className = "skill-card";
+          card.className = "skill-card console-panel";
+          var lvlClass = skill.lvl === "Learning" ? "lvl" : "lvl lvl-alt";
           card.innerHTML =
             '<div class="name">' + escapeHTML(skill.name) + '</div>' +
-            '<div class="lvl" aria-label="Proficiency: ' + escapeHTML(skill.lvl) + '">' +
+            '<div class="' + lvlClass + '" aria-label="Proficiency: ' + escapeHTML(skill.lvl) + '">' +
             escapeHTML(skill.lvl) + '</div>';
           panel.appendChild(card);
         });

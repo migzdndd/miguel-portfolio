@@ -10,30 +10,36 @@
 
 :root {
 
-  --bg: #000000;
-  --bg-elev: #050805;
+  --bg: #06080A;
+  --bg-elev: #0A0F0B;
 
-  --surface: #071007;
-  --surface-2: #0B170B;
+  --surface: #0B120D;
+  --surface-2: #101710;
 
-  --border: rgba(255, 255, 255, .09);
-  --border-strong: rgba(255, 255, 255, .16);
+  --border: rgba(190, 255, 215, .09);
+  --border-strong: rgba(190, 255, 215, .20);
 
-  --text: #EDEFF4;
-  --text-muted: #8D93A3;
-  --text-dim: #5C6273;
+  --text: #EAF3EC;
+  --text-muted: #93A79C;
+  --text-dim: #57685D;
 
-  --accent: #05A313;
-  --accent-rgb: 5, 163, 19;
+  /* Phosphor — bright signal, used sparingly for glow, active states, CTAs */
+  --accent: #3FF39B;
+  --accent-rgb: 63, 243, 155;
 
-  --accent-2: #05A313;
-  --accent-2-rgb: 5, 163, 19;
+  /* Signal — structural green, used for borders, hairlines, quiet accents */
+  --accent-2: #0E8F3C;
+  --accent-2-rgb: 14, 143, 60;
+
+  /* Amber — secondary console signal, used sparingly for status/highlight moments */
+  --amber: #FFB238;
+  --amber-rgb: 255, 178, 56;
 
   --danger: #E8607A;
 
   --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 
   --dur: 620ms;
   --dur-fast: 280ms;
@@ -45,6 +51,7 @@
 
   --radius: 14px;
   --radius-sm: 8px;
+  --radius-console: 4px;
 
 }
 
@@ -55,26 +62,31 @@
 
 [data-theme="light"] {
 
-  --bg: #F3F4F7;
+  --bg: #F1F4F0;
   --bg-elev: #FFFFFF;
 
   --surface: #FFFFFF;
-  --surface-2: #EEF0F4;
+  --surface-2: #E9F0E8;
 
-  --border: rgba(10, 14, 22, .09);
-  --border-strong: rgba(10, 14, 22, .18);
+  --border: rgba(10, 20, 14, .10);
+  --border-strong: rgba(10, 20, 14, .22);
 
-  --text: #12151C;
-  --text-muted: #565C6C;
-  --text-dim: #8A8F9C;
+  --text: #0C1410;
+  --text-muted: #4B5C51;
+  --text-dim: #85948B;
 
-  --accent: #057A10;
-  --accent-rgb: 5, 122, 16;
+  /* Phosphor darkens on light backgrounds to hold contrast */
+  --accent: #0E8F3C;
+  --accent-rgb: 14, 143, 60;
 
-  --accent-2: #057A10;
-  --accent-2-rgb: 5, 122, 16;
+  --accent-2: #0A7A33;
+  --accent-2-rgb: 10, 122, 51;
+
+  --amber: #B5720A;
+  --amber-rgb: 181, 114, 10;
 
 }
+
 
 
 /* =========================================================
@@ -236,6 +248,27 @@ img {
 }
 
 
+.sr-only {
+
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
+
+}
+
+
 /* =========================================================
    TYPOGRAPHY
    ========================================================= */
@@ -372,7 +405,7 @@ img {
 
 .btn-primary:hover {
 
-  background: #08bf17;
+  background: #6BFFC0;
 
 }
 
@@ -470,17 +503,70 @@ img {
 }
 
 
-.loader-status {
+.loader-boot {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: .4rem;
+
+  min-height: 3.6em;
+
+}
+
+
+.loader-boot-line {
 
   font-family: var(--font-mono);
 
-  font-size: .72rem;
+  font-size: .74rem;
 
-  letter-spacing: .14em;
+  letter-spacing: .02em;
 
   color: var(--text-dim);
 
-  text-transform: uppercase;
+  opacity: 0;
+
+  transform: translateY(5px);
+
+  animation: bootLineIn 320ms var(--ease) forwards;
+
+  animation-delay: calc(var(--i, 0) * 190ms + 120ms);
+
+}
+
+
+.loader-boot-ready {
+
+  color: var(--accent);
+
+}
+
+
+@keyframes bootLineIn {
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .loader-boot-line {
+
+    animation: none;
+
+    opacity: 1;
+
+    transform: none;
+
+  }
 
 }
 
@@ -997,6 +1083,38 @@ body.cursor-enabled:not(.touch) * {
 }
 
 
+.nav-foot .loc::after {
+
+  content: '_';
+
+  margin-left: .18em;
+
+  color: var(--accent);
+
+  animation: cursorBlink 1.1s step-end infinite;
+
+}
+
+
+@keyframes cursorBlink {
+
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .nav-foot .loc::after {
+
+    animation: none;
+
+  }
+
+}
+
+
 .theme-toggle {
 
   width: 38px;
@@ -1368,6 +1486,10 @@ body.cursor-enabled:not(.touch) * {
   display: flex;
 
   flex-direction: column;
+
+  padding: .4rem 1.5rem;
+
+  background: var(--surface);
 
   border-top: 1px solid var(--border);
 
@@ -2919,12 +3041,12 @@ body.cursor-enabled:not(.touch) * {
   background:
     radial-gradient(
       circle at 72% 45%,
-      rgba(5, 163, 19, .22),
+      rgba(14, 143, 60, .22),
       transparent 30%
     ),
     linear-gradient(
       135deg,
-      #05A313 0%,
+      #3FF39B 0%,
       #062408 36%,
       #000000 76%
     );
@@ -2967,13 +3089,13 @@ body.cursor-enabled:not(.touch) * {
     linear-gradient(
       90deg,
       transparent,
-      rgba(5, 163, 19, .12) 45%,
-      rgba(5, 163, 19, .85) 92%,
-      #0be51c
+      rgba(14, 143, 60, .12) 45%,
+      rgba(14, 143, 60, .85) 92%,
+      #6BFFC0
     );
 
   box-shadow:
-    -18px 0 45px rgba(5, 163, 19, .24);
+    -18px 0 45px rgba(14, 143, 60, .24);
 
   opacity: .9;
 }
@@ -3096,32 +3218,31 @@ body.page-leaving .page-content {
    ========================================================= */
 
 :root {
-  --brand-green: #05A313;
+  --brand-green: #3FF39B;
   --brand-black: #000000;
-  --brand-gradient: linear-gradient(135deg, #05A313 0%, #000000 72%);
-  --brand-gradient-soft: linear-gradient(135deg, rgba(5,163,19,.22), rgba(0,0,0,.94) 70%);
-  --brand-glow: 0 0 40px rgba(5,163,19,.16);
+  --brand-gradient: linear-gradient(135deg, #3FF39B 0%, #000000 72%);
+  --brand-gradient-soft: linear-gradient(135deg, rgba(14,143,60,.22), rgba(0,0,0,.94) 70%);
+  --brand-glow: 0 0 40px rgba(14,143,60,.16);
 }
 
 body {
   background:
-    radial-gradient(circle at 15% 10%, rgba(5,163,19,.08), transparent 30%),
-    radial-gradient(circle at 85% 90%, rgba(5,163,19,.05), transparent 30%),
-    #000;
+    radial-gradient(circle at 15% 10%, rgba(14,143,60,.08), transparent 30%),
+    radial-gradient(circle at 85% 90%, rgba(14,143,60,.05), transparent 30%),
+    var(--bg);
 }
 
 .bg-glow {
-  background: radial-gradient(circle, rgba(5,163,19,.14), transparent 68%) !important;
+  background: radial-gradient(circle, rgba(14,143,60,.14), transparent 68%) !important;
 }
 
 .control-panel {
-  background: linear-gradient(180deg, rgba(0,0,0,.97), rgba(3,12,3,.96)) !important;
-  border-color: rgba(5,163,19,.16) !important;
+  background: linear-gradient(180deg, rgba(6,8,10,.97), rgba(3,12,7,.96)) !important;
+  border-color: rgba(14,143,60,.16) !important;
 }
 
 .brand a span,
 .eyebrow,
-.loader-status,
 .loader-name,
 .skill-card .lvl,
 .beyond-card .sub,
@@ -3131,12 +3252,12 @@ body {
 
 .btn-primary {
   background: var(--brand-green) !important;
-  box-shadow: 0 0 0 rgba(5,163,19,0);
+  box-shadow: 0 0 0 rgba(14,143,60,0);
 }
 
 .btn-primary:hover {
-  background: #08bf17 !important;
-  box-shadow: 0 10px 30px rgba(5,163,19,.18);
+  background: #6BFFC0 !important;
+  box-shadow: 0 10px 30px rgba(14,143,60,.18);
 }
 
 .tag:hover,
@@ -3158,30 +3279,30 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  background: linear-gradient(135deg, rgba(5,163,19,.035), transparent 35%, rgba(5,163,19,.025));
+  background: linear-gradient(135deg, rgba(14,143,60,.035), transparent 35%, rgba(14,143,60,.025));
 }
 
 #loader {
   background:
-    radial-gradient(circle at 50% 45%, rgba(5,163,19,.10), transparent 34%),
-    #000 !important;
+    radial-gradient(circle at 50% 45%, rgba(14,143,60,.10), transparent 34%),
+    var(--bg) !important;
 }
 
 .loader-name {
-  text-shadow: 0 0 28px rgba(5,163,19,.24);
+  text-shadow: 0 0 28px rgba(14,143,60,.24);
 }
 
 .loader-bar {
   width: min(360px, 72vw) !important;
   height: 4px !important;
-  border: 1px solid rgba(5,163,19,.22);
-  background: rgba(5,163,19,.08) !important;
-  box-shadow: 0 0 28px rgba(5,163,19,.10);
+  border: 1px solid rgba(14,143,60,.22);
+  background: rgba(14,143,60,.08) !important;
+  box-shadow: 0 0 28px rgba(14,143,60,.10);
 }
 
 .loader-bar-fill {
-  background: linear-gradient(90deg, #05A313, #0be51c) !important;
-  box-shadow: 0 0 16px rgba(5,163,19,.55);
+  background: linear-gradient(90deg, #3FF39B, #6BFFC0) !important;
+  box-shadow: 0 0 16px rgba(14,143,60,.55);
 }
 
 /* Dynamic skill cards */
@@ -3195,7 +3316,7 @@ body {
 }
 
 .skill-card {
-  background: linear-gradient(145deg, rgba(5,163,19,.035), rgba(255,255,255,.012));
+  background: linear-gradient(145deg, rgba(14,143,60,.035), rgba(255,255,255,.012));
   box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
 }
 
@@ -3204,9 +3325,17 @@ body {
   align-items: center;
   margin-top: .25rem;
   padding: .35rem .55rem;
-  border: 1px solid rgba(5,163,19,.22);
+  border: 1px solid rgba(14,143,60,.22);
   border-radius: 999px;
-  background: rgba(5,163,19,.06);
+  background: rgba(14,143,60,.06);
+}
+
+/* Skills further along than the baseline "Learning" stage get the
+   amber console accent, so proficiency actually reads at a glance. */
+.skill-card .lvl.lvl-alt {
+  border-color: rgba(var(--amber-rgb), .32);
+  background: rgba(var(--amber-rgb), .08);
+  color: var(--amber) !important;
 }
 
 /* Project interaction */
@@ -3241,10 +3370,79 @@ body {
 }
 
 .modal-panel {
-  background: linear-gradient(145deg, rgba(6,16,6,.98), rgba(0,0,0,.98)) !important;
-  border-color: rgba(5,163,19,.18) !important;
-  box-shadow: 0 30px 100px rgba(0,0,0,.65), 0 0 50px rgba(5,163,19,.08) !important;
+  background: linear-gradient(145deg, rgba(8,14,10,.98), rgba(4,7,6,.98)) !important;
+  border-color: rgba(14,143,60,.18) !important;
+  box-shadow: 0 30px 100px rgba(0,0,0,.65), 0 0 50px rgba(14,143,60,.08) !important;
 }
+
+/* =========================================================
+   SIGNATURE: CONSOLE PANEL CORNER BRACKETS
+   The recurring visual mark of this redesign — every card-like
+   unit (project, skill, beyond, accomplishment, contact) reads
+   as a targeted panel on a system console, brackets included.
+   Pure background-image technique: no extra markup needed.
+   ========================================================= */
+
+.console-panel {
+
+  position: relative;
+
+  border-radius: var(--radius-console) !important;
+
+  background-image:
+    linear-gradient(var(--accent-2), var(--accent-2)),
+    linear-gradient(var(--accent-2), var(--accent-2)),
+    linear-gradient(var(--accent-2), var(--accent-2)),
+    linear-gradient(var(--accent-2), var(--accent-2)),
+    linear-gradient(var(--accent-2), var(--accent-2)),
+    linear-gradient(var(--accent-2), var(--accent-2)),
+    linear-gradient(var(--accent-2), var(--accent-2)),
+    linear-gradient(var(--accent-2), var(--accent-2));
+
+  background-repeat: no-repeat;
+
+  background-size:
+    2px 14px, 14px 2px,
+    2px 14px, 14px 2px,
+    2px 14px, 14px 2px,
+    2px 14px, 14px 2px;
+
+  background-position:
+    top -1px left -1px, top -1px left -1px,
+    top -1px right -1px, top -1px right -1px,
+    bottom -1px right -1px, bottom -1px right -1px,
+    bottom -1px left -1px, bottom -1px left -1px;
+
+  transition: background-image 240ms var(--ease), box-shadow 240ms var(--ease);
+
+}
+
+.console-panel:hover,
+.console-panel:focus-within,
+.console-panel:focus-visible {
+
+  background-image:
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent));
+
+  box-shadow: 0 0 0 1px rgba(var(--accent-rgb), .06) inset;
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .console-panel {
+    transition: none;
+  }
+
+}
+
 
 /* Beyond icons */
 .beyond-svg-icon {
@@ -3271,7 +3469,7 @@ body {
   place-items: center;
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(5,163,19,.22);
+  border: 1px solid rgba(14,143,60,.22);
   border-radius: 50%;
   color: var(--brand-green);
   font-family: var(--font-mono);
@@ -3280,7 +3478,7 @@ body {
 
 .social-contact-row:hover .social-icon {
   transform: rotate(8deg) scale(1.08);
-  background: rgba(5,163,19,.08);
+  background: rgba(14,143,60,.08);
 }
 
 @media (max-width: 700px) {
