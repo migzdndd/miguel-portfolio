@@ -68,25 +68,26 @@
 
       initAccomplishments();
 
-      /*
-       * Multi-page transition system.
-       */
       initPageTransition();
 
-      /*
-       * Sequential content reveal.
-       */
       initSequentialReveal();
 
     }
   );
 
-
   /* =======================================================
-     LOADER
-     ======================================================= */
+   FUTURISTIC SYSTEM LOADER
+   ALL PAGES
+   ======================================================= */
 
   function initLoader() {
+
+    /*
+     * The loader is shared by every page.
+     *
+     * If a page does not contain #loader,
+     * JavaScript creates it automatically.
+     */
 
     var loader =
       document.getElementById(
@@ -94,35 +95,515 @@
       );
 
 
+    /* -------------------------------------------------------
+       CREATE LOADER IF PAGE DOES NOT HAVE ONE
+       ------------------------------------------------------- */
+
     if (!loader) {
 
-      return;
+      loader =
+        document.createElement(
+          "div"
+        );
+
+
+      loader.id =
+        "loader";
+
+
+      loader.innerHTML =
+
+        '<div class="loader-core">' +
+
+        '<div class="loader-hud-line">' +
+
+        '<span>PORTFOLIO.OS</span>' +
+
+        '<span>SECURE BOOT // ONLINE</span>' +
+
+        '</div>' +
+
+
+        '<div class="loader-name">' +
+
+        'MIGUEL RIOVALDEZ' +
+
+        '</div>' +
+
+
+        '<div class="loader-boot">' +
+
+        '<div class="loader-boot-line" style="--i:0">' +
+        'Loading interface modules...' +
+        '</div>' +
+
+        '<div class="loader-boot-line" style="--i:1">' +
+        'Synchronizing portfolio systems...' +
+        '</div>' +
+
+        '<div class="loader-boot-line" style="--i:2">' +
+        'Preparing page environment...' +
+        '</div>' +
+
+        '<div class="loader-boot-line loader-boot-ready" style="--i:3">' +
+        'Portfolio ready.' +
+        '</div>' +
+
+        '</div>' +
+
+
+        '<div class="loader-progress">' +
+
+        '<div class="loader-progress-meta">' +
+
+        '<span data-loader-status>' +
+        'INITIALIZING CORE' +
+        '</span>' +
+
+        '<span class="value" data-loader-progress>' +
+        '000%' +
+        '</span>' +
+
+        '</div>' +
+
+
+        '<div class="loader-bar">' +
+
+        '<div class="loader-bar-fill"></div>' +
+
+        '</div>' +
+
+        '</div>' +
+
+
+        '<div class="loader-status">' +
+
+        '<span class="dot"></span>' +
+
+        'Initializing portfolio…' +
+
+        '</div>' +
+
+        '</div>';
+
+
+      /*
+       * Insert the loader before the rest
+       * of the page content.
+       */
+
+      document.body.prepend(
+        loader
+      );
 
     }
 
 
-    window.setTimeout(
-      function () {
+    /* -------------------------------------------------------
+       UPGRADE EXISTING LOADER
+       ------------------------------------------------------- */
 
-        loader.classList.add(
-          "hide"
+    var core =
+      loader.querySelector(
+        ".loader-core"
+      );
+
+
+    if (core) {
+
+      var progress =
+        core.querySelector(
+          ".loader-progress"
         );
 
 
-        /*
-         * Tell the Home page that the loader
-         * has finished so its content can begin
-         * revealing.
-         */
+      /*
+       * Add live percentage if it
+       * does not already exist.
+       */
 
-        document.dispatchEvent(
-          new Event(
-            "portfolio:loader-hidden"
+      if (
+        progress &&
+        !progress.querySelector(
+          "[data-loader-progress]"
+        )
+      ) {
+
+        var meta =
+          document.createElement(
+            "div"
+          );
+
+
+        meta.className =
+          "loader-progress-meta";
+
+
+        meta.innerHTML =
+
+          '<span data-loader-status>' +
+          'INITIALIZING CORE' +
+          '</span>' +
+
+          '<span class="value" data-loader-progress>' +
+          '000%' +
+          '</span>';
+
+
+        progress.insertBefore(
+          meta,
+          progress.firstChild
+        );
+
+      }
+
+
+      /*
+       * Add HUD header if it does
+       * not already exist.
+       */
+
+      if (
+        !core.querySelector(
+          ".loader-hud-line"
+        )
+      ) {
+
+        var hud =
+          document.createElement(
+            "div"
+          );
+
+
+        hud.className =
+          "loader-hud-line";
+
+
+        hud.innerHTML =
+
+          "<span>PORTFOLIO.OS</span>" +
+
+          "<span>SECURE BOOT // ONLINE</span>";
+
+
+        core.insertBefore(
+          hud,
+          core.firstChild
+        );
+
+      }
+
+    }
+
+
+    /* -------------------------------------------------------
+       LOADER TIMING
+       ------------------------------------------------------- */
+
+    var bootLines =
+      loader.querySelectorAll(
+        ".loader-boot-line"
+      );
+
+
+    var minimumTime =
+      reducedMotion
+
+        ? 350
+
+        : Math.max(
+          1450,
+          800 +
+          (
+            bootLines.length *
+            160
           )
         );
 
-      },
-      1000
+
+    var startTime =
+      performance.now();
+
+
+    var finished =
+      false;
+
+
+    var progressValue =
+      loader.querySelector(
+        "[data-loader-progress]"
+      );
+
+
+    var statusValue =
+      loader.querySelector(
+        "[data-loader-status]"
+      );
+
+
+    var progressFrame =
+      null;
+
+
+    /* -------------------------------------------------------
+       LIVE PROGRESS
+       ------------------------------------------------------- */
+
+    function animateProgress() {
+
+      if (
+        !progressValue
+      ) {
+
+        return;
+
+      }
+
+
+      var elapsed =
+        performance.now() -
+        startTime;
+
+
+      var ratio =
+        Math.min(
+          1,
+          elapsed /
+          minimumTime
+        );
+
+
+      /*
+       * Smooth mechanical easing.
+       */
+
+      var eased =
+        1 -
+        Math.pow(
+          1 - ratio,
+          2.4
+        );
+
+
+      progressValue.textContent =
+
+        String(
+          Math.round(
+            eased * 100
+          )
+        ).padStart(
+          3,
+          "0"
+        ) +
+
+        "%";
+
+
+      if (
+        statusValue
+      ) {
+
+        statusValue.textContent =
+
+          ratio < .20
+
+            ? "INITIALIZING CORE"
+
+            : ratio < .45
+
+              ? "LOADING INTERFACE"
+
+              : ratio < .72
+
+                ? "SYNCING MODULES"
+
+                : ratio < 1
+
+                  ? "FINALIZING"
+
+                  : "SYSTEM READY";
+
+      }
+
+
+      if (
+        ratio < 1 &&
+        !finished
+      ) {
+
+        progressFrame =
+          window.requestAnimationFrame(
+            animateProgress
+          );
+
+      }
+
+    }
+
+
+    animateProgress();
+
+
+    /* -------------------------------------------------------
+       FINISH LOADER
+       ------------------------------------------------------- */
+
+    function finishLoader() {
+
+      if (
+        finished
+      ) {
+
+        return;
+
+      }
+
+
+      finished =
+        true;
+
+
+      if (
+        progressFrame
+      ) {
+
+        window.cancelAnimationFrame(
+          progressFrame
+        );
+
+      }
+
+
+      /*
+       * Make sure the final state
+       * reaches 100%.
+       */
+
+      if (
+        progressValue
+      ) {
+
+        progressValue.textContent =
+          "100%";
+
+      }
+
+
+      if (
+        statusValue
+      ) {
+
+        statusValue.textContent =
+          "SYSTEM READY";
+
+      }
+
+
+      var elapsed =
+        performance.now() -
+        startTime;
+
+
+      var remaining =
+        Math.max(
+          0,
+          minimumTime -
+          elapsed
+        );
+
+
+      window.setTimeout(
+        function () {
+
+          loader.classList.add(
+            "hide"
+          );
+
+
+          loader.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+
+          /*
+           * Tell EVERY page that the loader
+           * has finished.
+           */
+
+          document.dispatchEvent(
+            new Event(
+              "portfolio:loader-hidden"
+            )
+          );
+
+
+          /*
+           * Remove the loader after
+           * its fade-out.
+           */
+
+          window.setTimeout(
+            function () {
+
+              if (
+                loader &&
+                loader.parentNode
+              ) {
+
+                loader.parentNode.removeChild(
+                  loader
+                );
+
+              }
+
+            },
+            reducedMotion
+              ? 20
+              : 720
+          );
+
+        },
+        remaining
+      );
+
+    }
+
+
+    /* -------------------------------------------------------
+       WAIT FOR PAGE LOAD
+       ------------------------------------------------------- */
+
+    if (
+      document.readyState ===
+      "complete"
+    ) {
+
+      finishLoader();
+
+    } else {
+
+      window.addEventListener(
+        "load",
+        finishLoader,
+        {
+          once: true
+        }
+      );
+
+    }
+
+
+    /*
+     * Safety fallback.
+     *
+     * Prevents the loader from ever
+     * getting stuck indefinitely.
+     */
+
+    window.setTimeout(
+      finishLoader,
+      3000
     );
 
   }
@@ -151,7 +632,8 @@
     }
 
 
-    var savedTheme = null;
+    var savedTheme =
+      null;
 
 
     try {
@@ -163,7 +645,8 @@
 
     } catch (error) {
 
-      savedTheme = null;
+      savedTheme =
+        null;
 
     }
 
@@ -191,7 +674,8 @@
         var current =
           html.getAttribute(
             "data-theme"
-          ) || "dark";
+          ) ||
+          "dark";
 
 
         var next =
@@ -216,8 +700,8 @@
         } catch (error) {
 
           /*
-           * Theme still works for
-           * the current page.
+           * Theme still works
+           * for the current page.
            */
 
         }
@@ -234,7 +718,8 @@
       var current =
         html.getAttribute(
           "data-theme"
-        ) || "dark";
+        ) ||
+        "dark";
 
 
       toggle.textContent =
@@ -275,7 +760,9 @@
       );
 
 
-    if (!links.length) {
+    if (
+      !links.length
+    ) {
 
       return;
 
@@ -295,7 +782,8 @@
 
     if (
       filename &&
-      filename !== "index.html"
+      filename !==
+      "index.html"
     ) {
 
       currentPage =
@@ -317,7 +805,8 @@
 
 
         var isCurrent =
-          page === currentPage;
+          page ===
+          currentPage;
 
 
         link.classList.toggle(
@@ -326,7 +815,9 @@
         );
 
 
-        if (isCurrent) {
+        if (
+          isCurrent
+        ) {
 
           link.setAttribute(
             "aria-current",
@@ -365,7 +856,10 @@
       );
 
 
-    if (!toggle || !panel) {
+    if (
+      !toggle ||
+      !panel
+    ) {
 
       return;
 
@@ -422,7 +916,9 @@
 
         toggle.setAttribute(
           "aria-expanded",
-          String(isOpen)
+          String(
+            isOpen
+          )
         );
 
 
@@ -493,7 +989,8 @@
       function (event) {
 
         if (
-          event.key === "Escape"
+          event.key ===
+          "Escape"
         ) {
 
           closeMenu();
@@ -512,7 +1009,9 @@
 
   function initCustomCursor() {
 
-    if (isTouch) {
+    if (
+      isTouch
+    ) {
 
       return;
 
@@ -548,11 +1047,13 @@
 
 
     var mouseX =
-      window.innerWidth / 2;
+      window.innerWidth /
+      2;
 
 
     var mouseY =
-      window.innerHeight / 2;
+      window.innerHeight /
+      2;
 
 
     var outlineX =
@@ -588,13 +1089,19 @@
     function animate() {
 
       outlineX +=
-        (mouseX - outlineX) *
-        0.18;
+        (
+          mouseX -
+          outlineX
+        ) *
+        .18;
 
 
       outlineY +=
-        (mouseY - outlineY) *
-        0.18;
+        (
+          mouseY -
+          outlineY
+        ) *
+        .18;
 
 
       outline.style.transform =
@@ -637,12 +1144,15 @@
         );
 
 
-        if (cursorText) {
+        if (
+          cursorText
+        ) {
 
           cursorText.textContent =
             element.getAttribute(
               "data-cursor-text"
-            ) || "";
+            ) ||
+            "";
 
         }
 
@@ -683,7 +1193,9 @@
         );
 
 
-        if (cursorText) {
+        if (
+          cursorText
+        ) {
 
           cursorText.textContent =
             "";
@@ -732,20 +1244,28 @@
             var x =
               event.clientX -
               rect.left -
-              rect.width / 2;
+              rect.width /
+              2;
 
 
             var y =
               event.clientY -
               rect.top -
-              rect.height / 2;
+              rect.height /
+              2;
 
 
             element.style.transform =
               "translate(" +
-              (x * 0.18) +
+              (
+                x *
+                .18
+              ) +
               "px," +
-              (y * 0.18) +
+              (
+                y *
+                .18
+              ) +
               "px)";
 
           }
@@ -788,12 +1308,14 @@
 
 
     var count =
-      window.innerWidth < 820
+      window.innerWidth <
+        820
         ? 8
         : 16;
 
 
-    var nodes = [];
+    var nodes =
+      [];
 
 
     for (
@@ -812,20 +1334,20 @@
         "hero-node";
 
 
-      var top =
-        Math.random() * 100;
-
-
-      var left =
-        Math.random() * 100;
-
-
       node.style.top =
-        top + "%";
+        (
+          Math.random() *
+          100
+        ) +
+        "%";
 
 
       node.style.left =
-        left + "%";
+        (
+          Math.random() *
+          100
+        ) +
+        "%";
 
 
       container.appendChild(
@@ -835,12 +1357,13 @@
 
       nodes.push({
 
-        element: node,
+        element:
+          node,
 
         depth:
-          0.4 +
+          .4 +
           Math.random() *
-          0.6
+          .6
 
       });
 
@@ -864,13 +1387,13 @@
         var px =
           event.clientX /
           window.innerWidth -
-          0.5;
+          .5;
 
 
         var py =
           event.clientY /
           window.innerHeight -
-          0.5;
+          .5;
 
 
         nodes.forEach(
@@ -906,56 +1429,230 @@
 
   function initProjectModal() {
 
-    var modal = document.getElementById("projectModal");
-    var closeButton = document.getElementById("modalClose");
-    var title = document.getElementById("projectModalTitle");
-    var body = document.getElementById("projectModalBody");
+    var modal =
+      document.getElementById(
+        "projectModal"
+      );
 
-    if (!modal || !closeButton || !title || !body) return;
 
-    /*
-     * Project content lives in one reusable structure.
-     * Add another object here when a new project is introduced.
-     */
+    var closeButton =
+      document.getElementById(
+        "modalClose"
+      );
+
+
+    var title =
+      document.getElementById(
+        "projectModalTitle"
+      );
+
+
+    var body =
+      document.getElementById(
+        "projectModalBody"
+      );
+
+
+    if (
+      !modal ||
+      !closeButton ||
+      !title ||
+      !body
+    ) {
+
+      return;
+
+    }
+
+
     var projects = {
+
       "mfc-youth": {
-        title: "MFC Youth Area Management System",
+
+        title:
+          "MFC Youth Area Management System",
+
         sections: [
-          { heading: "Overview", text: "An offline desktop application built with C# and Windows Forms to help Missionary Families of Christ (MFC) Youth areas manage members, chapters, and service assignments through a centralized local SQLite database." },
-          { heading: "Problem", text: "MFC Youth areas track members, chapter groupings, and service assignments — information that's hard to manage reliably without a dedicated, offline-friendly tool." },
-          { heading: "Solution", text: "A self-contained Windows desktop app with a local SQLite database, so area coordinators can manage members, chapters, and assignments in one place without needing an internet connection." },
-          { heading: "Features", list: ["Members management", "Chapters management", "Services management & assignments", "Dashboard & statistics", "Search & refresh", "Member relationships", "Local SQLite database", "Packaged Windows installer"] },
-          { heading: "Technologies", tags: ["C#", "Windows Forms", "SQLite", "Git", "GitHub", "Inno Setup"] },
-          { heading: "What I Learned", list: ["Structuring a multi-form Windows desktop application in C#", "Designing and querying a local relational database with SQLite", "Packaging and distributing a desktop app with Inno Setup", "Managing a real project's history with Git and GitHub"] },
+
           {
-            heading: "Architecture", architecture: [
-              ["User Interface", "Windows Forms screens for members, chapters, services, and the dashboard."],
-              ["Application Logic", "C# handles data flow, validation, and assignment relationships between screens."],
-              ["Database", "Local SQLite database stores members, chapters, and service records."]
-            ]
-          }
-        ],
-        link: "https://github.com/migzdndd/MFC-Youth-Area-Management-System"
-      },
-      "mytale-asia": {
-        title: "MyTale Asia Hytale Development",
-        sections: [
-          { heading: "Overview", text: "Hytale server development project for MyTale Asia, involving server-side development, mods, plugins, configuration, and ongoing maintenance using Java, Git, and GitHub." },
-          { heading: "Project Type", text: "Server Development" },
-          { heading: "Technologies", tags: ["Java", "Git", "GitHub", "OpenAI"] }
-        ],
-        link: "https://github.com/Xerain556/MyTale-Asia-Development"
-      },
-      "this-webpage": {
-        title: "This Webpage — Portfolio Website",
-        sections: [
-          {
-            heading: "Overview",
-            text: "The portfolio website itself, built as a responsive multi-page website to showcase projects, skills, accomplishments, interests, and contact information."
+            heading:
+              "Overview",
+
+            text:
+              "An offline desktop application built with C# and Windows Forms to help Missionary Families of Christ (MFC) Youth areas manage members, chapters, and service assignments through a centralized local SQLite database."
+
           },
+
           {
-            heading: "Features",
+            heading:
+              "Problem",
+
+            text:
+              "MFC Youth areas track members, chapter groupings, and service assignments — information that's hard to manage reliably without a dedicated, offline-friendly tool."
+
+          },
+
+          {
+            heading:
+              "Solution",
+
+            text:
+              "A self-contained Windows desktop app with a local SQLite database, so area coordinators can manage members, chapters, and assignments in one place without needing an internet connection."
+
+          },
+
+          {
+            heading:
+              "Features",
+
             list: [
+              "Members management",
+              "Chapters management",
+              "Services management & assignments",
+              "Dashboard & statistics",
+              "Search & refresh",
+              "Member relationships",
+              "Local SQLite database",
+              "Packaged Windows installer"
+            ]
+
+          },
+
+          {
+            heading:
+              "Technologies",
+
+            tags: [
+              "C#",
+              "Windows Forms",
+              "SQLite",
+              "Git",
+              "GitHub",
+              "Inno Setup"
+            ]
+
+          },
+
+          {
+            heading:
+              "What I Learned",
+
+            list: [
+              "Structuring a multi-form Windows desktop application in C#",
+              "Designing and querying a local relational database with SQLite",
+              "Packaging and distributing a desktop app with Inno Setup",
+              "Managing a real project's history with Git and GitHub"
+            ]
+
+          },
+
+          {
+
+            heading:
+              "Architecture",
+
+            architecture: [
+
+              [
+                "User Interface",
+                "Windows Forms screens for members, chapters, services, and the dashboard."
+              ],
+
+              [
+                "Application Logic",
+                "C# handles data flow, validation, and assignment relationships between screens."
+              ],
+
+              [
+                "Database",
+                "Local SQLite database stores members, chapters, and service records."
+              ]
+
+            ]
+
+          }
+
+        ],
+
+        link:
+          "https://github.com/migzdndd/MFC-Youth-Area-Management-System"
+
+      },
+
+
+      "mytale-asia": {
+
+        title:
+          "MyTale Asia Hytale Development",
+
+        sections: [
+
+          {
+
+            heading:
+              "Overview",
+
+            text:
+              "Hytale server development project for MyTale Asia, involving server-side development, mods, plugins, configuration, and ongoing maintenance using Java, Git, and GitHub."
+
+          },
+
+          {
+
+            heading:
+              "Project Type",
+
+            text:
+              "Server Development"
+
+          },
+
+          {
+
+            heading:
+              "Technologies",
+
+            tags: [
+              "Java",
+              "Git",
+              "GitHub",
+              "OpenAI"
+            ]
+
+          }
+
+        ],
+
+        link:
+          "https://github.com/Xerain556/MyTale-Asia-Development"
+
+      },
+
+
+      "this-webpage": {
+
+        title:
+          "This Webpage — Portfolio Website",
+
+        sections: [
+
+          {
+
+            heading:
+              "Overview",
+
+            text:
+              "The portfolio website itself, built as a responsive multi-page website to showcase projects, skills, accomplishments, interests, and contact information."
+
+          },
+
+          {
+
+            heading:
+              "Features",
+
+            list: [
+
               "Multi-page navigation",
               "Responsive design for desktop and mobile",
               "Dark and light theme toggle",
@@ -966,22 +1663,36 @@
               "Networking visualization",
               "Accomplishments accordion",
               "Local theme preference storage"
+
             ]
+
           },
+
           {
-            heading: "Technologies",
+
+            heading:
+              "Technologies",
+
             tags: [
+
               "HTML5",
               "CSS3",
               "JavaScript",
               "Google Fonts",
               "Responsive Design",
               "LocalStorage"
+
             ]
+
           },
+
           {
-            heading: "JavaScript Uses",
+
+            heading:
+              "JavaScript Uses",
+
             list: [
+
               "Theme switching with localStorage",
               "Mobile navigation",
               "Custom cursor interactions",
@@ -991,148 +1702,572 @@
               "Project details modal",
               "Skills and networking interactions",
               "Accomplishments accordion"
+
             ]
+
           }
+
         ],
-        link: "index.html",
-        linkLabel: "View Website ↗"
+
+        link:
+          "index.html",
+
+        linkLabel:
+          "View Website ↗"
+
       }
+
     };
 
-    var lastFocused = null;
+
+    var lastFocused =
+      null;
+
 
     function escapeHTML(value) {
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+      return String(
+        value
+      )
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
     }
+
 
     function renderProject(project) {
-      title.textContent = project.title;
-      body.innerHTML = "";
 
-      project.sections.forEach(function (section) {
-        var wrapper = document.createElement("div");
-        wrapper.className = "modal-section";
+      title.textContent =
+        project.title;
 
-        var heading = document.createElement("h4");
-        heading.textContent = section.heading;
-        wrapper.appendChild(heading);
 
-        if (section.text) {
-          var p = document.createElement("p");
-          p.textContent = section.text;
-          wrapper.appendChild(p);
+      body.innerHTML =
+        "";
+
+
+      project.sections.forEach(
+        function (section) {
+
+          var wrapper =
+            document.createElement(
+              "div"
+            );
+
+
+          wrapper.className =
+            "modal-section";
+
+
+          var heading =
+            document.createElement(
+              "h4"
+            );
+
+
+          heading.textContent =
+            section.heading;
+
+
+          wrapper.appendChild(
+            heading
+          );
+
+
+          if (
+            section.text
+          ) {
+
+            var p =
+              document.createElement(
+                "p"
+              );
+
+
+            p.textContent =
+              section.text;
+
+
+            wrapper.appendChild(
+              p
+            );
+
+          }
+
+
+          if (
+            section.list
+          ) {
+
+            var ul =
+              document.createElement(
+                "ul"
+              );
+
+
+            section.list.forEach(
+              function (item) {
+
+                var li =
+                  document.createElement(
+                    "li"
+                  );
+
+
+                li.textContent =
+                  item;
+
+
+                ul.appendChild(
+                  li
+                );
+
+              }
+            );
+
+
+            wrapper.appendChild(
+              ul
+            );
+
+          }
+
+
+          if (
+            section.tags
+          ) {
+
+            var tags =
+              document.createElement(
+                "div"
+              );
+
+
+            tags.className =
+              "pf-tags";
+
+
+            section.tags.forEach(
+              function (tagText) {
+
+                var tag =
+                  document.createElement(
+                    "span"
+                  );
+
+
+                tag.className =
+                  "tag";
+
+
+                tag.textContent =
+                  tagText;
+
+
+                tags.appendChild(
+                  tag
+                );
+
+              }
+            );
+
+
+            wrapper.appendChild(
+              tags
+            );
+
+          }
+
+
+          if (
+            section.architecture
+          ) {
+
+            var arch =
+              document.createElement(
+                "div"
+              );
+
+
+            arch.className =
+              "arch-diagram";
+
+
+            section.architecture.forEach(
+              function (
+                nodeData,
+                index
+              ) {
+
+                var node =
+                  document.createElement(
+                    "div"
+                  );
+
+
+                node.className =
+                  "arch-node";
+
+
+                node.setAttribute(
+                  "tabindex",
+                  "0"
+                );
+
+
+                node.innerHTML =
+                  '<div class="lbl">' +
+                  escapeHTML(
+                    nodeData[0]
+                  ) +
+                  '</div><div class="expl">' +
+                  escapeHTML(
+                    nodeData[1]
+                  ) +
+                  "</div>";
+
+
+                arch.appendChild(
+                  node
+                );
+
+
+                if (
+                  index <
+                  section.architecture.length -
+                  1
+                ) {
+
+                  var arrow =
+                    document.createElement(
+                      "div"
+                    );
+
+
+                  arrow.className =
+                    "arch-arrow";
+
+
+                  arrow.textContent =
+                    "↓";
+
+
+                  arch.appendChild(
+                    arrow
+                  );
+
+                }
+
+              }
+            );
+
+
+            wrapper.appendChild(
+              arch
+            );
+
+          }
+
+
+          body.appendChild(
+            wrapper
+          );
+
         }
+      );
 
-        if (section.list) {
-          var ul = document.createElement("ul");
-          section.list.forEach(function (item) {
-            var li = document.createElement("li");
-            li.textContent = item;
-            ul.appendChild(li);
-          });
-          wrapper.appendChild(ul);
-        }
 
-        if (section.tags) {
-          var tags = document.createElement("div");
-          tags.className = "pf-tags";
-          section.tags.forEach(function (tagText) {
-            var tag = document.createElement("span");
-            tag.className = "tag";
-            tag.textContent = tagText;
-            tags.appendChild(tag);
-          });
-          wrapper.appendChild(tags);
-        }
+      var actions =
+        document.createElement(
+          "div"
+        );
 
-        if (section.architecture) {
-          var arch = document.createElement("div");
-          arch.className = "arch-diagram";
-          section.architecture.forEach(function (nodeData, index) {
-            var node = document.createElement("div");
-            node.className = "arch-node";
-            node.setAttribute("tabindex", "0");
-            node.innerHTML = '<div class="lbl">' + escapeHTML(nodeData[0]) + '</div><div class="expl">' + escapeHTML(nodeData[1]) + '</div>';
-            arch.appendChild(node);
-            if (index < section.architecture.length - 1) {
-              var arrow = document.createElement("div");
-              arrow.className = "arch-arrow";
-              arrow.textContent = "↓";
-              arch.appendChild(arrow);
-            }
-          });
-          wrapper.appendChild(arch);
-        }
 
-        body.appendChild(wrapper);
-      });
+      actions.className =
+        "modal-section project-modal-actions";
 
-      var actions = document.createElement("div");
-      actions.className = "modal-section project-modal-actions";
-      var link = document.createElement("a");
-      link.className = "btn btn-primary";
-      link.href = project.link;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = project.linkLabel || "View on GitHub ↗";
-      actions.appendChild(link);
-      body.appendChild(actions);
+
+      var link =
+        document.createElement(
+          "a"
+        );
+
+
+      link.className =
+        "btn btn-primary";
+
+
+      link.href =
+        project.link;
+
+
+      link.target =
+        "_blank";
+
+
+      link.rel =
+        "noopener noreferrer";
+
+
+      link.textContent =
+        project.linkLabel ||
+        "View on GitHub ↗";
+
+
+      actions.appendChild(
+        link
+      );
+
+
+      body.appendChild(
+        actions
+      );
+
     }
+
 
     function openModal(projectId) {
-      var project = projects[projectId];
-      if (!project) return;
 
-      lastFocused = document.activeElement;
-      renderProject(project);
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
+      var project =
+        projects[
+        projectId
+        ];
 
-      window.setTimeout(function () { closeButton.focus(); }, 30);
+
+      if (!project) {
+
+        return;
+
+      }
+
+
+      lastFocused =
+        document.activeElement;
+
+
+      renderProject(
+        project
+      );
+
+
+      modal.classList.add(
+        "open"
+      );
+
+
+      modal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      document.body.style.overflow =
+        "hidden";
+
+
+      window.setTimeout(
+        function () {
+
+          closeButton.focus();
+
+        },
+        30
+      );
+
     }
+
 
     function closeModal() {
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      if (lastFocused) lastFocused.focus();
+
+      modal.classList.remove(
+        "open"
+      );
+
+
+      modal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      document.body.style.overflow =
+        "";
+
+
+      if (
+        lastFocused
+      ) {
+
+        lastFocused.focus();
+
+      }
+
     }
 
-    document.querySelectorAll("[data-project-open]:not(.project-feature)").forEach(function (trigger) {
-      trigger.addEventListener("click", function (event) {
-        if (trigger.matches("a")) return;
-        event.preventDefault();
-        event.stopPropagation();
-        openModal(trigger.getAttribute("data-project-open"));
-      });
-    });
 
-    document.querySelectorAll(".project-feature[data-project-open=\"true\"]").forEach(function (card) {
-      card.addEventListener("click", function (event) {
-        if (event.target.closest("a") || event.target.closest("button")) return;
-        openModal(card.getAttribute("data-project-id"));
-      });
-      card.addEventListener("keydown", function (event) {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          openModal(card.getAttribute("data-project-id"));
+    document
+      .querySelectorAll(
+        "[data-project-open]:not(.project-feature)"
+      )
+      .forEach(
+        function (trigger) {
+
+          trigger.addEventListener(
+            "click",
+            function (event) {
+
+              if (
+                trigger.matches(
+                  "a"
+                )
+              ) {
+
+                return;
+
+              }
+
+
+              event.preventDefault();
+
+              event.stopPropagation();
+
+
+              openModal(
+                trigger.getAttribute(
+                  "data-project-open"
+                )
+              );
+
+            }
+          );
+
         }
-      });
-    });
+      );
 
-    closeButton.addEventListener("click", closeModal);
-    modal.addEventListener("click", function (event) {
-      if (event.target === modal) closeModal();
-    });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && modal.classList.contains("open")) closeModal();
-    });
+
+    document
+      .querySelectorAll(
+        '.project-feature[data-project-open="true"]'
+      )
+      .forEach(
+        function (card) {
+
+          card.addEventListener(
+            "click",
+            function (event) {
+
+              if (
+                event.target.closest(
+                  "a"
+                ) ||
+                event.target.closest(
+                  "button"
+                )
+              ) {
+
+                return;
+
+              }
+
+
+              openModal(
+                card.getAttribute(
+                  "data-project-id"
+                )
+              );
+
+            }
+          );
+
+
+          card.addEventListener(
+            "keydown",
+            function (event) {
+
+              if (
+                event.key ===
+                "Enter" ||
+                event.key ===
+                " "
+              ) {
+
+                event.preventDefault();
+
+
+                openModal(
+                  card.getAttribute(
+                    "data-project-id"
+                  )
+                );
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+    closeButton.addEventListener(
+      "click",
+      closeModal
+    );
+
+
+    modal.addEventListener(
+      "click",
+      function (event) {
+
+        if (
+          event.target ===
+          modal
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key ===
+          "Escape" &&
+          modal.classList.contains(
+            "open"
+          )
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
   }
 
 
@@ -1148,7 +2283,9 @@
       );
 
 
-    if (!nodes.length) {
+    if (
+      !nodes.length
+    ) {
 
       return;
 
@@ -1177,7 +2314,9 @@
           );
 
 
-          if (!wasOpen) {
+          if (
+            !wasOpen
+          ) {
 
             node.classList.add(
               "open"
@@ -1199,8 +2338,10 @@
           function (event) {
 
             if (
-              event.key === "Enter" ||
-              event.key === " "
+              event.key ===
+              "Enter" ||
+              event.key ===
+              " "
             ) {
 
               event.preventDefault();
@@ -1224,120 +2365,445 @@
 
   function initSkills() {
 
-    var tabs = document.querySelectorAll(".skill-tab");
-    var panelsContainer = document.getElementById("skillsPanels");
+    var tabs =
+      document.querySelectorAll(
+        ".skill-tab"
+      );
 
-    if (!tabs.length || !panelsContainer) return;
 
-    /*
-     * Content-driven skill data.
-     * Add a new skill to the appropriate category instead of creating
-     * another custom HTML structure.
-     */
+    var panelsContainer =
+      document.getElementById(
+        "skillsPanels"
+      );
+
+
+    if (
+      !tabs.length ||
+      !panelsContainer
+    ) {
+
+      return;
+
+    }
+
+
     var skillsData = {
+
       development: [
-        { name: "C#", lvl: "Learning" },
-        { name: "C++", lvl: "Intermediate" },
-        { name: "Python", lvl: "Learning" },
-        { name: "Java", lvl: "Learning" },
-        { name: "JavaScript", lvl: "Learning" }
+
+        {
+          name: "C#",
+          lvl: "Learning"
+        },
+
+        {
+          name: "C++",
+          lvl: "Intermediate"
+        },
+
+        {
+          name: "Python",
+          lvl: "Learning"
+        },
+
+        {
+          name: "Java",
+          lvl: "Learning"
+        },
+
+        {
+          name: "JavaScript",
+          lvl: "Learning"
+        }
+
       ],
+
+
       networking: [
-        { name: "IPv4", lvl: "Learning" },
-        { name: "IPv6", lvl: "Learning" },
-        { name: "Subnetting", lvl: "Learning" },
-        { name: "Data Comm. & Networking Fundamentals", lvl: "Learning" },
-        { name: "Cisco Packet Tracer", lvl: "Learning" }
+
+        {
+          name: "IPv4",
+          lvl: "Learning"
+        },
+
+        {
+          name: "IPv6",
+          lvl: "Learning"
+        },
+
+        {
+          name: "Subnetting",
+          lvl: "Learning"
+        },
+
+        {
+          name:
+            "Data Comm. & Networking Fundamentals",
+          lvl: "Learning"
+        },
+
+        {
+          name:
+            "Cisco Packet Tracer",
+          lvl: "Learning"
+        }
+
       ],
+
+
       database: [
-        { name: "SQLite", lvl: "Learning" },
-        { name: "SQL", lvl: "Learning" },
-        { name: "MySQL / DB Management", lvl: "Learning" }
+
+        {
+          name: "SQLite",
+          lvl: "Learning"
+        },
+
+        {
+          name: "SQL",
+          lvl: "Learning"
+        },
+
+        {
+          name:
+            "MySQL / DB Management",
+          lvl: "Learning"
+        }
+
       ],
+
+
       web: [
-        { name: "HTML", lvl: "Learning" },
-        { name: "CSS", lvl: "Learning" },
-        { name: "JavaScript", lvl: "Learning" },
-        { name: "Responsive Web Design", lvl: "Learning" }
+
+        {
+          name: "HTML",
+          lvl: "Learning"
+        },
+
+        {
+          name: "CSS",
+          lvl: "Learning"
+        },
+
+        {
+          name: "JavaScript",
+          lvl: "Learning"
+        },
+
+        {
+          name:
+            "Responsive Web Design",
+          lvl: "Learning"
+        }
+
       ],
+
+
       creative: [
-        { name: "Canva", lvl: "Learning" },
-        { name: "UI/UX", lvl: "Learning" },
-        { name: "Graphic Design", lvl: "Learning" },
-        { name: "Digital Design", lvl: "Learning" },
-        { name: "Content Creation", lvl: "Learning" }
+
+        {
+          name: "Canva",
+          lvl: "Learning"
+        },
+
+        {
+          name: "UI/UX",
+          lvl: "Learning"
+        },
+
+        {
+          name: "Graphic Design",
+          lvl: "Learning"
+        },
+
+        {
+          name: "Digital Design",
+          lvl: "Learning"
+        },
+
+        {
+          name: "Content Creation",
+          lvl: "Learning"
+        }
+
       ]
+
     };
 
+
     function escapeHTML(value) {
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+      return String(
+        value
+      )
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
     }
 
-    function renderSkills(activeCategory) {
-      panelsContainer.innerHTML = "";
 
-      Object.keys(skillsData).forEach(function (category) {
-        var panel = document.createElement("div");
-        panel.className = "skill-panel";
-        panel.id = "panel-" + category;
-        panel.setAttribute("role", "tabpanel");
-        panel.setAttribute("aria-labelledby", "skill-" + category);
+    function renderSkills(
+      activeCategory
+    ) {
 
-        if (category === activeCategory) panel.classList.add("active");
+      panelsContainer.innerHTML =
+        "";
 
-        skillsData[category].forEach(function (skill) {
-          var card = document.createElement("div");
-          card.className = "skill-card console-panel";
-          var lvlClass = skill.lvl === "Learning" ? "lvl" : "lvl lvl-alt";
-          card.innerHTML =
-            '<div class="name">' + escapeHTML(skill.name) + '</div>' +
-            '<div class="' + lvlClass + '" aria-label="Proficiency: ' + escapeHTML(skill.lvl) + '">' +
-            escapeHTML(skill.lvl) + '</div>';
-          panel.appendChild(card);
-        });
 
-        panelsContainer.appendChild(panel);
-      });
-    }
+      Object.keys(
+        skillsData
+      ).forEach(
+        function (category) {
 
-    tabs.forEach(function (tab) {
-      tab.id = "skill-" + tab.getAttribute("data-skill");
-    });
+          var panel =
+            document.createElement(
+              "div"
+            );
 
-    renderSkills("development");
 
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        var category = tab.getAttribute("data-skill");
+          panel.className =
+            "skill-panel";
 
-        tabs.forEach(function (other) {
-          var active = other === tab;
-          other.classList.toggle("active", active);
-          other.setAttribute("aria-selected", String(active));
-        });
 
-        renderSkills(category);
-      });
+          panel.id =
+            "panel-" +
+            category;
 
-      tab.addEventListener("keydown", function (event) {
-        var index = Array.prototype.indexOf.call(tabs, tab);
-        var next = index;
 
-        if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
-        if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+          panel.setAttribute(
+            "role",
+            "tabpanel"
+          );
 
-        if (next !== index) {
-          event.preventDefault();
-          tabs[next].focus();
-          tabs[next].click();
+
+          panel.setAttribute(
+            "aria-labelledby",
+            "skill-" +
+            category
+          );
+
+
+          if (
+            category ===
+            activeCategory
+          ) {
+
+            panel.classList.add(
+              "active"
+            );
+
+          }
+
+
+          skillsData[
+            category
+          ].forEach(
+            function (skill) {
+
+              var card =
+                document.createElement(
+                  "div"
+                );
+
+
+              card.className =
+                "skill-card console-panel";
+
+
+              var lvlClass =
+                skill.lvl ===
+                  "Learning"
+                  ? "lvl"
+                  : "lvl lvl-alt";
+
+
+              card.innerHTML =
+                '<div class="name">' +
+                escapeHTML(
+                  skill.name
+                ) +
+                '</div>' +
+                '<div class="' +
+                lvlClass +
+                '" aria-label="Proficiency: ' +
+                escapeHTML(
+                  skill.lvl
+                ) +
+                '">' +
+                escapeHTML(
+                  skill.lvl
+                ) +
+                "</div>";
+
+
+              panel.appendChild(
+                card
+              );
+
+            }
+          );
+
+
+          panelsContainer.appendChild(
+            panel
+          );
+
         }
-      });
-    });
+      );
+
+    }
+
+
+    tabs.forEach(
+      function (tab) {
+
+        tab.id =
+          "skill-" +
+          tab.getAttribute(
+            "data-skill"
+          );
+
+      }
+    );
+
+
+    renderSkills(
+      "development"
+    );
+
+
+    tabs.forEach(
+      function (tab) {
+
+        tab.addEventListener(
+          "click",
+          function () {
+
+            var category =
+              tab.getAttribute(
+                "data-skill"
+              );
+
+
+            tabs.forEach(
+              function (other) {
+
+                var active =
+                  other ===
+                  tab;
+
+
+                other.classList.toggle(
+                  "active",
+                  active
+                );
+
+
+                other.setAttribute(
+                  "aria-selected",
+                  String(
+                    active
+                  )
+                );
+
+              }
+            );
+
+
+            renderSkills(
+              category
+            );
+
+          }
+        );
+
+
+        tab.addEventListener(
+          "keydown",
+          function (event) {
+
+            var index =
+              Array.prototype.indexOf.call(
+                tabs,
+                tab
+              );
+
+
+            var next =
+              index;
+
+
+            if (
+              event.key ===
+              "ArrowRight"
+            ) {
+
+              next =
+                (
+                  index +
+                  1
+                ) %
+                tabs.length;
+
+            }
+
+
+            if (
+              event.key ===
+              "ArrowLeft"
+            ) {
+
+              next =
+                (
+                  index -
+                  1 +
+                  tabs.length
+                ) %
+                tabs.length;
+
+            }
+
+
+            if (
+              next !==
+              index
+            ) {
+
+              event.preventDefault();
+
+              tabs[
+                next
+              ].focus();
+
+              tabs[
+                next
+              ].click();
+
+            }
+
+          }
+        );
+
+      }
+    );
+
   }
 
 
@@ -1359,7 +2825,9 @@
       );
 
 
-    if (!nodes.length) {
+    if (
+      !nodes.length
+    ) {
 
       return;
 
@@ -1410,7 +2878,9 @@
           );
 
 
-          if (explanation) {
+          if (
+            explanation
+          ) {
 
             explanation.textContent =
               networkInfo[
@@ -1442,8 +2912,10 @@
           function (event) {
 
             if (
-              event.key === "Enter" ||
-              event.key === " "
+              event.key ===
+              "Enter" ||
+              event.key ===
+              " "
             ) {
 
               event.preventDefault();
@@ -1473,7 +2945,9 @@
       );
 
 
-    if (!items.length) {
+    if (
+      !items.length
+    ) {
 
       return;
 
@@ -1527,7 +3001,9 @@
           );
 
 
-          if (!wasOpen) {
+          if (
+            !wasOpen
+          ) {
 
             item.classList.add(
               "open"
@@ -1549,8 +3025,10 @@
           function (event) {
 
             if (
-              event.key === "Enter" ||
-              event.key === " "
+              event.key ===
+              "Enter" ||
+              event.key ===
+              " "
             ) {
 
               event.preventDefault();
@@ -1567,15 +3045,16 @@
 
   }
 
-
   /* =======================================================
-     SEQUENTIAL CONTENT REVEAL
-     ======================================================= */
+   SEQUENTIAL PAGE REVEAL
+   ALL PAGES
+   ======================================================= */
+
   function initSequentialReveal() {
 
     var page =
       document.querySelector(
-        ".page-shell, .standalone-page"
+        ".page-shell"
       );
 
 
@@ -1586,266 +3065,75 @@
     }
 
 
-    /*
-     * Elements are intentionally targeted individually
-     * so the page feels like it is being constructed
-     * piece by piece rather than appearing all at once.
-     */
-
-    var selectors = [
-
-      /* ==============================
-         HOME
-         ============================== */
-
-      ".hero-content .eyebrow",
-
-      ".hero-name",
-
-      ".hero-sub",
-
-      ".hero-support",
-
-      ".hero-tagline",
-
-      ".hero-bio",
-
-      ".hero-ctas",
-
-      ".status-strip",
-
-
-      /* ==============================
-         PAGE HEADERS
-         ============================== */
-
-      ".page-head .eyebrow",
-
-      ".page-head h1",
-
-
-      /* ==============================
-         ABOUT
-         ============================== */
-
-      ".about-copy p",
-
-      ".learning-list .tag",
-
-      ".fact-row",
-
-
-      /* ==============================
-         PROJECTS
-         ============================== */
-
-      ".project-feature .pf-top",
-
-      ".project-feature .pf-title",
-
-      ".project-feature .pf-desc",
-
-      ".project-feature .pf-tags .tag",
-
-      ".project-feature .pf-actions .btn",
-
-      ".projects-note",
-
-
-      /* ==============================
-         SKILLS
-         ============================== */
-
-      ".skills-tabs .skill-tab",
-
-      ".skill-panel.active .skill-card",
-
-
-      /* ==============================
-         NETWORKING
-         ============================== */
-
-      ".net-viz",
-
-      ".net-layout > div:last-child > p",
-
-      ".net-topic",
-
-
-      /* ==============================
-         ACCOMPLISHMENTS
-         ============================== */
-
-      ".acc-item",
-
-
-      /* ==============================
-         BEYOND
-         ============================== */
-
-      ".beyond-card",
-
-
-      /* ==============================
-         CONTACT
-         ============================== */
-
-      ".contact-list .contact-row"
-
-    ];
-
-
-    var revealTargets = [];
-
-
-    /*
-     * Collect elements in document order.
-     */
-
-    selectors.forEach(
-      function (selector) {
-
-        var elements =
-          page.querySelectorAll(
-            selector
-          );
-
-
-        elements.forEach(
-          function (element) {
-
-            if (
-              revealTargets.indexOf(
-                element
-              ) === -1
-            ) {
-
-              revealTargets.push(
-                element
-              );
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-    if (!revealTargets.length) {
-
-      return;
-
-    }
-
-
-    /*
-     * Sort according to the actual position
-     * of each element in the document.
-     */
-
-    revealTargets.sort(
-      function (a, b) {
-
-        if (
-          a === b
-        ) {
-
-          return 0;
-
-        }
-
-
-        var position =
-          a.compareDocumentPosition(
-            b
-          );
-
-
-        if (
-          position &
-          Node.DOCUMENT_POSITION_FOLLOWING
-        ) {
-
-          return -1;
-
-        }
-
-
-        return 1;
-
-      }
-    );
-
-
-    /*
-     * Apply the initial hidden state and
-     * calculate the stagger delay.
-     */
-
-    revealTargets.forEach(
-      function (
-        element,
-        index
-      ) {
-
-        element.classList.add(
-          "page-reveal"
-        );
-
-
-        element.style.setProperty(
-          "--reveal-delay",
-          (
-            60 +
-            index * 55
-          ) +
-          "ms"
-        );
-
-      }
-    );
+    var elements =
+      page.querySelectorAll(
+        "[data-reveal], .reveal, .section-reveal"
+      );
 
 
     function reveal() {
 
-      window.requestAnimationFrame(
-        function () {
+      /*
+       * If no reveal elements exist,
+       * simply reveal the page.
+       */
 
-          window.requestAnimationFrame(
+      if (!elements.length) {
+
+        page.classList.add(
+          "page-ready"
+        );
+
+        return;
+
+      }
+
+
+      elements.forEach(
+        function (element, index) {
+
+          if (
+            reducedMotion
+          ) {
+
+            element.classList.add(
+              "revealed"
+            );
+
+            return;
+
+          }
+
+
+          window.setTimeout(
             function () {
 
-              revealTargets.forEach(
-                function (
-                  element
-                ) {
-
-                  element.classList.add(
-                    "is-visible"
-                  );
-
-                }
+              element.classList.add(
+                "revealed"
               );
 
-            }
+            },
+            80 +
+            (
+              index *
+              90
+            )
           );
 
         }
       );
 
+
+      page.classList.add(
+        "page-ready"
+      );
+
     }
 
 
-    /*
-     * Home waits for the initialization loader.
-     */
-
-    var isHome =
-      page.classList.contains(
-        "page-shell"
-      );
-
+    /* -------------------------------------------------------
+       ALL PAGES WAIT FOR LOADER
+       ------------------------------------------------------- */
 
     var loader =
       document.getElementById(
@@ -1853,46 +3141,55 @@
       );
 
 
-    if (
-      isHome &&
-      loader
-    ) {
+    /*
+     * Safety fallback.
+     */
 
-      if (
-        loader.classList.contains(
-          "hide"
-        )
-      ) {
-
-        reveal();
-
-      } else {
-
-        document.addEventListener(
-          "portfolio:loader-hidden",
-          reveal,
-          {
-            once: true
-          }
-        );
-
-      }
-
-    } else {
-
-      /*
-       * All other pages begin their reveal
-       * immediately.
-       */
+    if (!loader) {
 
       reveal();
 
+      return;
+
     }
 
+
+    /*
+     * Loader already finished.
+     */
+
+    if (
+      loader.classList.contains(
+        "hide"
+      )
+    ) {
+
+      reveal();
+
+      return;
+
+    }
+
+
+    /*
+     * Loader is still running.
+     * Wait for it to finish.
+     */
+
+    document.addEventListener(
+      "portfolio:loader-hidden",
+      reveal,
+      {
+        once: true
+      }
+    );
+
   }
+
+
   /* =======================================================
-   PAGE TRANSITIONS
-   ======================================================= */
+     PAGE TRANSITIONS
+     ======================================================= */
 
   function initPageTransition() {
 
@@ -1901,6 +3198,7 @@
         "pageTransition"
       );
 
+
     if (!transition) {
 
       return;
@@ -1908,18 +3206,14 @@
     }
 
 
-    /*
-     * Every page starts underneath the same green/black
-     * system layer, then the layer sweeps away.
-     * This keeps normal page loads and browser Back/Forward
-     * navigation visually consistent.
-     */
-
-    if (!reducedMotion) {
+    if (
+      !reducedMotion
+    ) {
 
       document.body.classList.add(
         "page-entering"
       );
+
 
       window.setTimeout(
         function () {
@@ -1934,10 +3228,6 @@
 
     }
 
-
-    /*
-     * Handle internal portfolio navigation.
-     */
 
     var links =
       document.querySelectorAll(
@@ -1968,13 +3258,9 @@
             }
 
 
-            /*
-             * External links, downloads, and
-             * modified clicks keep normal behavior.
-             */
-
             if (
-              link.target === "_blank" ||
+              link.target ===
+              "_blank" ||
               link.hasAttribute(
                 "download"
               )
@@ -2025,10 +3311,6 @@
             }
 
 
-            /*
-             * Ignore same-page navigation.
-             */
-
             if (
               destination.pathname ===
               window.location.pathname &&
@@ -2043,36 +3325,45 @@
             }
 
 
-            if (isNavigating) {
+            if (
+              isNavigating
+            ) {
+
               event.preventDefault();
+
               return;
+
             }
 
 
             event.preventDefault();
 
 
-            if (reducedMotion) {
-              isNavigating = true;
+            if (
+              reducedMotion
+            ) {
+
+              isNavigating =
+                true;
+
 
               window.location.href =
                 destination.href;
+
 
               return;
 
             }
 
 
-            /*
-             * Sweep the green/black system layer back
-             * over the current page before navigation.
-             */
+            isNavigating =
+              true;
 
-            isNavigating = true;
 
             document.body.classList.remove(
               "page-entering"
             );
+
 
             document.body.classList.add(
               "page-leaving"
