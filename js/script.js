@@ -94,9 +94,9 @@
       storedTheme ||
       (
         window.matchMedia &&
-        window.matchMedia(
-          "(prefers-color-scheme: light)"
-        ).matches
+          window.matchMedia(
+            "(prefers-color-scheme: light)"
+          ).matches
           ? "light"
           : "dark"
       );
@@ -959,7 +959,7 @@
 
             const target =
               tab.getAttribute(
-                "data-target"
+                "aria-controls"
               );
 
             if (!target) {
@@ -1075,9 +1075,9 @@
 
             if (
               event.key ===
-                "Enter" ||
+              "Enter" ||
               event.key ===
-                " "
+              " "
             ) {
 
               event.preventDefault();
@@ -1158,9 +1158,9 @@
 
             if (
               event.key ===
-                "Enter" ||
+              "Enter" ||
               event.key ===
-                " "
+              " "
             ) {
 
               event.preventDefault();
@@ -1182,6 +1182,88 @@
      PROJECT MODAL
      ======================================================= */
 
+  /* Extended details shown inside the project modal.
+     Keyed by each card's data-project-id. */
+  const PROJECT_DETAILS = {
+
+    "mfc-youth": {
+      title: "MFC Youth Area<br>Management System",
+      meta: "Completed &middot; Software Development",
+      description:
+        "An offline desktop application designed to help Missionary " +
+        "Families of Christ (MFC) Youth areas efficiently manage " +
+        "members, chapters, and service assignments through a " +
+        "centralized local database.",
+      tags: [
+        "C#", "Windows Forms", "SQLite", "Git", "GitHub", "Inno Setup"
+      ],
+      links: [
+        {
+          label: "GitHub ↗",
+          href: "https://github.com/migzdndd/MFC-Youth-Area-Management-System",
+          external: true
+        }
+      ]
+    },
+
+    "mytale-asia": {
+      title: "MyTale Asia<br>Hytale Development",
+      meta: "Completed &middot; Server Development",
+      description:
+        "Hytale server development project for MyTale Asia, involving " +
+        "server-side development, mods, plugins, configuration, and " +
+        "ongoing maintenance using Java, Git, and GitHub.",
+      tags: ["Java", "Git", "GitHub", "OpenAI"],
+      links: [
+        {
+          label: "GitHub ↗",
+          href: "https://github.com/Xerain556/MyTale-Asia-Development",
+          external: true
+        }
+      ]
+    },
+
+    "bitmon-smp": {
+      title: "BitMon SMP<br>Cobblemon Survival Server",
+      meta: "Ongoing &middot; Minecraft Server Development",
+      description:
+        "BitMon SMP is a Cobblemon-themed Minecraft Survival " +
+        "Multiplayer server that blends the traditional Minecraft " +
+        "survival experience with Pok\u00e9mon-inspired creature " +
+        "collecting and training. As an Assistant Developer, I help " +
+        "build and improve server features, configure and maintain " +
+        "server systems, troubleshoot technical issues, and support " +
+        "plugin and mod integration for the wider multiplayer " +
+        "experience.",
+      tags: [
+        "Java", "Minecraft Server Development", "Cobblemon",
+        "Server Configuration", "Mod/Plugin Integration",
+        "Git", "GitHub", "Debugging &amp; Troubleshooting"
+      ],
+      links: []
+    },
+
+    "this-webpage": {
+      title: "This Webpage<br>Portfolio Website",
+      meta: "Completed &middot; Web Development",
+      description:
+        "The site you're on right now — a responsive, multi-page " +
+        "portfolio built from scratch to bring my projects, skills, " +
+        "and interests together in one place, complete with theming, " +
+        "page transitions, and a few small interactive details along " +
+        "the way.",
+      tags: [
+        "HTML5", "CSS3", "JavaScript", "Google Fonts",
+        "Responsive Design", "LocalStorage"
+      ],
+      links: [
+        { label: "View Website ↗", href: "index.html", external: false }
+      ]
+    }
+
+  };
+
+
   function initProjectModal() {
 
     const modal =
@@ -1195,13 +1277,91 @@
     const closeButtons =
       $$(".modal-close", modal);
 
+    const modalTitle =
+      $("#projectModalTitle", modal);
+
+    const modalBody =
+      $("#projectModalBody", modal);
+
 
     const projectCards =
       $$(".project-feature[data-project-clickable='true']");
 
 
+    let lastFocused = null;
+
+
+    const renderProject =
+      id => {
+
+        const data =
+          PROJECT_DETAILS[id];
+
+        if (!data || !modalTitle || !modalBody) {
+          return false;
+        }
+
+
+        modalTitle.innerHTML = data.title;
+
+
+        const tagsHtml =
+          data.tags
+            .map(tag => `<span class="tag">${tag}</span>`)
+            .join("");
+
+
+        const linksHtml =
+          data.links
+            .map(link => {
+
+              const cls =
+                link.external
+                  ? "btn btn-ghost magnetic"
+                  : "btn btn-ghost magnetic";
+
+              const attrs =
+                link.external
+                  ? ' target="_blank" rel="noopener noreferrer"'
+                  : "";
+
+              return (
+                `<a class="${cls}" href="${link.href}"${attrs}>` +
+                `${link.label}</a>`
+              );
+
+            })
+            .join("");
+
+
+        modalBody.innerHTML =
+          `<p class="pf-status" style="margin-bottom:1.4rem;">` +
+          `<span class="dot" aria-hidden="true"></span>${data.meta}</p>` +
+          `<div class="modal-section"><h4>Overview</h4>` +
+          `<p>${data.description}</p></div>` +
+          `<div class="modal-section"><h4>Technologies</h4>` +
+          `<div class="pf-tags">${tagsHtml}</div></div>` +
+          (
+            linksHtml
+              ? `<div class="modal-section pf-actions">${linksHtml}</div>`
+              : ""
+          );
+
+
+        return true;
+
+      };
+
+
     const openModal =
-      () => {
+      id => {
+
+        if (!renderProject(id)) {
+          return;
+        }
+
+        lastFocused =
+          document.activeElement;
 
         modal.classList.add(
           "open"
@@ -1249,11 +1409,9 @@
           .overflow = "";
 
 
-        if (
-          projectCards[0]
-        ) {
+        if (lastFocused) {
 
-          projectCards[0].focus();
+          lastFocused.focus();
 
         }
 
@@ -1263,15 +1421,46 @@
     projectCards.forEach(
       card => {
 
+        const id =
+          card.dataset.projectId;
+
         card.setAttribute(
           "tabindex",
           "0"
         );
 
 
+        // Links/buttons inside the card (GitHub, View Website, etc.)
+        // handle their own behaviour and shouldn't also trigger the
+        // card's "open modal" click.
+        $$("a, button", card).forEach(
+          control => {
+
+            control.addEventListener(
+              "click",
+              event => {
+
+                event.stopPropagation();
+
+                if (
+                  control.dataset.projectOpen &&
+                  control.tagName === "BUTTON"
+                ) {
+
+                  openModal(id);
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+
         card.addEventListener(
           "click",
-          openModal
+          () => openModal(id)
         );
 
 
@@ -1281,14 +1470,14 @@
 
             if (
               event.key ===
-                "Enter" ||
+              "Enter" ||
               event.key ===
-                " "
+              " "
             ) {
 
               event.preventDefault();
 
-              openModal();
+              openModal(id);
 
             }
 
@@ -1334,7 +1523,7 @@
 
         if (
           event.key ===
-            "Escape" &&
+          "Escape" &&
           modal.classList.contains(
             "open"
           )
@@ -1387,11 +1576,6 @@
 
   }
 
-
-  /* =======================================================
-     LOADER
-     ======================================================= */
-
   function initLoader() {
 
     const loader =
@@ -1401,410 +1585,160 @@
       return;
     }
 
+    /*
+     * The loader is only shown on the
+     * initial Home entry.
+     *
+     * Navigation back to Home should use
+     * the normal page transition instead.
+     */
 
-    const core =
-      $(".loader-core", loader);
+    const navigationEntry =
+      performance.getEntriesByType("navigation")[0];
 
-    const bootLines =
-      $$(".loader-boot-line", loader);
-
-    const progress =
-      $(".loader-bar-fill", loader);
-
-    const progressValue =
-      $(".loader-progress-meta .value", loader);
-
-    const status =
-      $(".loader-status", loader);
-
-
-    const reducedMotion =
-      prefersReducedMotion;
-
-
-    let progressFrame =
-      null;
-
-    let loaderFinished =
-      false;
-
-
-    loader.setAttribute(
-      "role",
-      "status"
-    );
-
-    loader.setAttribute(
-      "aria-live",
-      "polite"
-    );
-
-    loader.setAttribute(
-      "aria-busy",
-      "true"
-    );
-
-
-    if (core) {
-
-      core.style.willChange =
-        "transform, opacity";
-
-
-      bootLines.forEach(
-        (line, index) => {
-
-          line.style.setProperty(
-            "--i",
-            index
-          );
-
-        }
+    const isInitialHomeEntry =
+      (
+        window.location.pathname.endsWith("/") ||
+        window.location.pathname.endsWith("/index.html") ||
+        window.location.pathname === ""
+      ) &&
+      (
+        !navigationEntry ||
+        navigationEntry.type === "navigate"
       );
 
-    }
+    if (!isInitialHomeEntry) {
 
+      loader.classList.add("hide");
 
-    const minimumTime =
-      reducedMotion
+      loader.setAttribute(
+        "aria-hidden",
+        "true"
+      );
 
-        ? 180
+      loader.setAttribute(
+        "aria-busy",
+        "false"
+      );
 
-        : Math.min(
-            2200,
-            Math.max(
-              1150,
-              760 +
-              (
-                bootLines.length *
-                130
-              )
-            )
-          );
+      window.setTimeout(
+        () => {
 
+          if (
+            loader &&
+            loader.parentNode
+          ) {
 
-    const startedAt =
-      performance.now();
-
-
-    const updateProgress =
-      value => {
-
-        const clamped =
-          Math.max(
-            0,
-            Math.min(
-              100,
-              value
-            )
-          );
-
-
-        if (progress) {
-
-          progress.style.width =
-            `${clamped}%`;
-
-        }
-
-
-        if (progressValue) {
-
-          progressValue.textContent =
-            `${Math.round(
-              clamped
-            )}%`;
-
-        }
-
-      };
-
-
-    const updateStatus =
-      text => {
-
-        if (!status) {
-          return;
-        }
-
-
-        const value =
-          $(".loader-status-text", status);
-
-
-        if (value) {
-
-          value.textContent =
-            text;
-
-        }
-        else {
-
-          status.textContent =
-            text;
-
-        }
-
-      };
-
-
-    const finishLoader =
-      () => {
-
-        if (loaderFinished) {
-          return;
-        }
-
-
-        loaderFinished = true;
-
-
-        if (progressFrame) {
-
-          window.cancelAnimationFrame(
-            progressFrame
-          );
-
-          progressFrame = null;
-
-        }
-
-
-        updateProgress(
-          100
-        );
-
-
-        updateStatus(
-          "Portfolio ready"
-        );
-
-
-        bootLines.forEach(
-          (line, index) => {
-
-            if (
-              index ===
-              bootLines.length - 1
-            ) {
-
-              line.classList.add(
-                "loader-boot-ready"
-              );
-
-            }
+            loader.parentNode.removeChild(
+              loader
+            );
 
           }
-        );
 
-
-        const elapsed =
-          performance.now() -
-          startedAt;
-
-
-        const remaining =
-          Math.max(
-            0,
-            minimumTime -
-            elapsed
-          );
-
-
-        window.setTimeout(
-          () => {
-
-            loader.classList.add(
-              "hide"
-            );
-
-
-            loader.setAttribute(
-              "aria-hidden",
-              "true"
-            );
-
-
-            loader.setAttribute(
-              "aria-busy",
-              "false"
-            );
-
-
-            window.dispatchEvent(
-              new CustomEvent(
-                "portfolio:loader-hidden"
-              )
-            );
-
-
-            window.setTimeout(
-              () => {
-
-                if (
-                  progressFrame
-                ) {
-
-                  window.cancelAnimationFrame(
-                    progressFrame
-                  );
-
-                  progressFrame =
-                    null;
-
-                }
-
-
-                if (
-                  loader &&
-                  loader.parentNode
-                ) {
-
-                  loader.parentNode.removeChild(
-                    loader
-                  );
-
-                }
-
-              },
-              reducedMotion
-                ? 30
-                : 720
-            );
-
-          },
-          remaining
-        );
-
-      };
-
-
-    const animateProgress =
-      () => {
-
-        if (loaderFinished) {
-          return;
-        }
-
-
-        const elapsed =
-          performance.now() -
-          startedAt;
-
-
-        const ratio =
-          Math.min(
-            1,
-            elapsed /
-            minimumTime
-          );
-
-
-        const eased =
-          1 -
-          Math.pow(
-            1 - ratio,
-            2.4
-          );
-
-
-        updateProgress(
-          eased * 100
-        );
-
-
-        if (
-          ratio >= 1
-        ) {
-
-          progressFrame =
-            null;
-
-          finishLoader();
-
-          return;
-
-        }
-
-
-        progressFrame =
-          requestAnimationFrame(
-            animateProgress
-          );
-
-      };
-
-
-    updateProgress(
-      0
-    );
-
-
-    updateStatus(
-      "Initializing interface"
-    );
-
-
-    if (reducedMotion) {
-
-      updateProgress(
-        100
+        },
+        50
       );
-
-      updateStatus(
-        "Portfolio ready"
-      );
-
-      finishLoader();
 
       return;
 
     }
 
+    /*
+     * Initial Home entry: play the short boot
+     * sequence, then dismiss the loader.
+     */
 
-    progressFrame =
-      requestAnimationFrame(
-        animateProgress
-      );
+    const bar =
+      $(".loader-bar-fill", loader);
 
+    const status =
+      $("#loaderStatus");
 
-    window.addEventListener(
-      "load",
+    const bootLines =
+      $$(".loader-boot-line", loader);
+
+    const lastBootLine =
+      bootLines[bootLines.length - 1];
+
+    const fillDuration =
+      prefersReducedMotion ? 1 : 900;
+
+    const holdDuration =
+      prefersReducedMotion ? 120 : 420;
+
+    // Boot lines fade in via CSS (staggered by --i).
+    // Wait for them, then fill the progress bar.
+    const bootDelay =
+      prefersReducedMotion
+        ? 0
+        : (bootLines.length - 1) * 190 + 120 + 320;
+
+    window.setTimeout(
       () => {
 
-        const elapsed =
-          performance.now() -
-          startedAt;
+        if (bar) {
 
+          bar.style.transition =
+            `width ${fillDuration}ms var(--ease, ease)`;
 
-        if (
-          elapsed >=
-          minimumTime
-        ) {
+          // Force layout so the transition reliably fires.
+          void bar.offsetWidth;
 
-          finishLoader();
+          bar.style.width = "100%";
 
         }
 
       },
-      {
-        once: true
-      }
+      bootDelay
     );
 
-
-    /*
-     * Hard safety fallback.
-     * The portfolio must never remain
-     * inaccessible because of the loader.
-     */
+    const dismissAfter =
+      bootDelay + fillDuration + holdDuration;
 
     window.setTimeout(
-      finishLoader,
-      2600
+      () => {
+
+        if (status) {
+
+          status.textContent =
+            "Profile Ready - Miguel Riovaldez";
+
+        }
+
+        loader.classList.add("hide");
+
+        loader.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+        loader.setAttribute(
+          "aria-busy",
+          "false"
+        );
+
+        window.setTimeout(
+          () => {
+
+            if (
+              loader &&
+              loader.parentNode
+            ) {
+
+              loader.parentNode.removeChild(
+                loader
+              );
+
+            }
+
+          },
+          prefersReducedMotion ? 50 : 700
+        );
+
+      },
+      dismissAfter
     );
 
   }
-
 
 })();
