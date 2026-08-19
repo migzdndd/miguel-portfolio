@@ -1,196 +1,96 @@
 <!DOCTYPE html>
-
 <html data-theme="dark" lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<title>Miguel Riovaldez — Skills</title>
-<meta content="Skills Miguel Riovaldez is developing across software development, networking, databases, web technologies, and creative work." name="description"/>
-<meta content="Miguel Riovaldez — Skills" property="og:title"/>
-<meta content="Technologies and areas Miguel Riovaldez is currently learning and exploring." property="og:description"/>
-<meta content="website" property="og:type"/>
-<meta content="skills.html" property="og:url"/>
-<meta content="summary" name="twitter:card"/>
-<meta content="#3FF39B" media="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="#F3F4F7" media="(prefers-color-scheme: light)" name="theme-color"/>
-<link href="skills.html" rel="canonical"/>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306080A'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%233FF39B' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" rel="icon"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+  <title>Miguel Riovaldez — Skills</title>
+  <meta name="description" content="Capability matrix for Miguel Riovaldez across development, networking, databases, web technologies, and creative work." />
+  <meta property="og:title" content="Miguel Riovaldez — Skills" />
+  <meta property="og:description" content="Capability matrix for Miguel Riovaldez across development, networking, databases, web technologies, and creative work." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="skills.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta content="#3FF39B" media="(prefers-color-scheme: dark)" name="theme-color" />
+  <meta content="#F3F4F7" media="(prefers-color-scheme: light)" name="theme-color" />
+  <link href="skills.html" rel="canonical" />
+  <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306080A'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%233FF39B' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" rel="icon" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/v2.css" rel="stylesheet" />
+  
 </head>
-<body>
-<a class="skip-link" href="#main-content">Skip to main content</a>
-<div id="pageTransition"></div>
-<!-- ==========================================
-       CUSTOM CURSOR
-       ========================================== -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-outline" id="cursorOutline">
-<span id="cursorText"></span>
-</div>
-<!-- ==========================================
-       BACKGROUND
-       ========================================== -->
-<div aria-hidden="true" class="bg-glow"></div>
-<div aria-hidden="true" class="bg-grid"></div>
-<!-- ==========================================
-       MOBILE NAVIGATION
-       ========================================== -->
-<button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle">
-<span></span>
-<span></span>
-<span></span>
-</button>
-<!-- ==========================================
-       NAVIGATION
-       ========================================== -->
-<nav aria-label="Primary" class="control-panel" id="controlPanel">
-<div class="brand">
-<a href="index.html">
-<span>MR</span>
-</a>
-<span aria-hidden="true" class="brand-dot"></span>
-</div>
-<ul class="nav-list" id="navList">
-<li>
-<a data-page-link="home" href="index.html">
-<span class="n">01</span>
-<span class="l">Home</span>
-</a>
-</li>
-<li>
-<a data-page-link="about" href="about.html">
-<span class="n">02</span>
-<span class="l">About</span>
-</a>
-</li>
-<li>
-<a data-page-link="projects" href="projects.html">
-<span class="n">03</span>
-<span class="l">Projects</span>
-</a>
-</li>
-<li>
-<a data-page-link="skills" href="skills.html">
-<span class="n">04</span>
-<span class="l">Skills</span>
-</a>
-</li>
+<body class="portfolio-v2">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pageTransition"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-outline" id="cursorOutline"><span id="cursorText"></span></div>
+  <div aria-hidden="true" class="bg-glow"></div>
+  <div aria-hidden="true" class="bg-grid"></div>
+  <div aria-hidden="true" class="v2-orbit v2-orbit-a"></div>
+  <button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+  <nav aria-label="Primary" class="control-panel" id="controlPanel">
+    <div class="brand"><a data-cursor-text="HOME" href="index.html"><span>MR</span></a><span aria-hidden="true" class="brand-dot"></span></div>
+    <ul class="nav-list" id="navList"><li><a data-cursor-text="GO" data-page-link="home" href="index.html"><span class="n">01</span><span class="l">Home</span></a></li><li><a data-cursor-text="GO" data-page-link="about" href="about.html"><span class="n">02</span><span class="l">About</span></a></li><li><a data-cursor-text="GO" data-page-link="projects" href="projects.html"><span class="n">03</span><span class="l">Projects</span></a></li><li><a data-cursor-text="GO" data-page-link="skills" href="skills.html"><span class="n">04</span><span class="l">Skills</span></a></li><li><a data-cursor-text="GO" data-page-link="accomplishments" href="accomplishments.html"><span class="n">05</span><span class="l">Accomplishments</span></a></li><li><a data-cursor-text="GO" data-page-link="beyond" href="beyond.html"><span class="n">06</span><span class="l">Beyond</span></a></li><li><a data-cursor-text="GO" data-page-link="contact" href="contact.html"><span class="n">07</span><span class="l">Contact</span></a></li></ul>
+    <div class="nav-foot"><span class="loc">PH · MNL</span><button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">◐</button></div>
+  </nav>
+  <main class="page-content" id="main-content" tabindex="-1">
+  <section class="standalone-page v2-skills-page" data-page="skills"><div class="page-inner">
+    <header class="page-head v2-editorial-head page-reveal">
+      <p class="eyebrow">04 / Skills / Capability Matrix</p>
+      <h1>Tools are useful.<br />Applied skills matter more.</h1>
+      <p class="v2-page-lede">This matrix separates hands-on project experience from coursework and active learning, so the level of exposure stays clear.</p>
+    </header>
 
-<li>
-<a data-page-link="accomplishments" href="accomplishments.html">
-<span class="n">05</span>
-<span class="l">Accomplishments</span>
-</a>
-</li>
-<li>
-<a data-page-link="beyond" href="beyond.html">
-<span class="n">06</span>
-<span class="l">Beyond</span>
-</a>
-</li>
-<li>
-<a data-page-link="contact" href="contact.html">
-<span class="n">07</span>
-<span class="l">Contact</span>
-</a>
-</li>
-</ul>
-<div class="nav-foot">
-<span class="loc">
-        PH · MNL
-      </span>
-<button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">
-        ◐
-      </button>
-</div>
-</nav>
-<!-- ==========================================
-       SKILLS PAGE
-       ========================================== -->
-<main class="page-content" id="main-content" tabindex="-1">
-<section class="standalone-page" data-page="skills">
-<div class="page-inner">
-<!-- Page Header -->
-<div class="page-head">
-<p class="eyebrow">04 / Skills</p>
-<h1>
-            What I'm working with.
-          </h1>
-</div>
-<!-- ======================================
-             SKILL CATEGORY TABS
-             ====================================== -->
-<div aria-label="Skill categories" class="skills-tabs" id="skillsTabs" role="tablist">
-<button aria-controls="panel-development" aria-selected="true" class="skill-tab active" data-skill="development" role="tab">Coding</button>
-<button aria-controls="panel-networking" aria-selected="false" class="skill-tab" data-skill="networking" role="tab">
-            Networking
-          </button>
-<button aria-controls="panel-database" aria-selected="false" class="skill-tab" data-skill="database" role="tab">
-            Database
-          </button>
-<button aria-controls="panel-web" aria-selected="false" class="skill-tab" data-skill="web" role="tab">Web Development</button>
-<button aria-controls="panel-creative" aria-selected="false" class="skill-tab" data-skill="creative" role="tab">
-            Creative
-          </button>
-</div>
-<!-- ======================================
-             SKILL PANELS
-             ====================================== -->
-<div aria-live="polite" id="skillsPanels">
+    <div class="v2-skill-legend page-reveal"><span><i class="v2-dot hands"></i> Hands-on</span><span><i class="v2-dot course"></i> Coursework</span><span><i class="v2-dot learn"></i> Learning</span></div>
 
-<!-- Coding / Development -->
-<div aria-hidden="false" class="skill-panel active" id="panel-development" role="tabpanel">
-<div class="skill-card"><div class="name">C#</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">Java</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">JavaScript</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">SQL</div><span class="lvl">Coursework</span></div>
-<div class="skill-card"><div class="name">Windows Forms</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">Minecraft Server Development</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">Git &amp; GitHub</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">Debugging &amp; Troubleshooting</div><span class="lvl">Hands-on</span></div>
-</div>
+    <div aria-label="Skill categories" class="skills-tabs v2-skill-tabs page-reveal" id="skillsTabs" role="tablist">
+      <button aria-controls="panel-development" aria-selected="true" class="skill-tab active" data-skill="development" role="tab">Development</button>
+      <button aria-controls="panel-networking" aria-selected="false" class="skill-tab" data-skill="networking" role="tab">Networking</button>
+      <button aria-controls="panel-database" aria-selected="false" class="skill-tab" data-skill="database" role="tab">Database</button>
+      <button aria-controls="panel-web" aria-selected="false" class="skill-tab" data-skill="web" role="tab">Web</button>
+      <button aria-controls="panel-creative" aria-selected="false" class="skill-tab" data-skill="creative" role="tab">Creative</button>
+    </div>
 
-<!-- Networking -->
-<div aria-hidden="true" class="skill-panel" id="panel-networking" role="tabpanel">
-<div class="skill-card"><div class="name">Data Communication Fundamentals</div><span class="lvl lvl-alt">Coursework</span></div>
-<div class="skill-card"><div class="name">IPv4 &amp; IPv6 Addressing</div><span class="lvl lvl-alt">Coursework</span></div>
-<div class="skill-card"><div class="name">Subnetting</div><span class="lvl lvl-alt">Coursework</span></div>
-<div class="skill-card"><div class="name">Cisco Packet Tracer</div><span class="lvl lvl-alt">Coursework</span></div>
-</div>
-
-<!-- Database -->
-<div aria-hidden="true" class="skill-panel" id="panel-database" role="tabpanel">
-<div class="skill-card"><div class="name">SQL &amp; Relational Design</div><span class="lvl">Coursework</span></div>
-<div class="skill-card"><div class="name">SQLite</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">MySQL</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">Information Management</div><span class="lvl">Coursework</span></div>
-</div>
-
-<!-- Web Development -->
-<div aria-hidden="true" class="skill-panel" id="panel-web" role="tabpanel">
-<div class="skill-card"><div class="name">HTML5</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">CSS3 &amp; Responsive Design</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">JavaScript (DOM &amp; Interactivity)</div><span class="lvl">Hands-on</span></div>
-<div class="skill-card"><div class="name">Git &amp; GitHub</div><span class="lvl">Hands-on</span></div>
-</div>
-
-<!-- Creative -->
-<div aria-hidden="true" class="skill-panel" id="panel-creative" role="tabpanel">
-<div class="skill-card"><div class="name">Graphic Design</div><span class="lvl lvl-alt">Learning</span></div>
-<div class="skill-card"><div class="name">Content Creation</div><span class="lvl lvl-alt">Learning</span></div>
-<div class="skill-card"><div class="name">Visual Layout &amp; Composition</div><span class="lvl lvl-alt">Learning</span></div>
-</div>
-
-</div>
-</div>
-</section>
+    <div aria-live="polite" id="skillsPanels" class="v2-skill-panels page-reveal">
+      <div aria-hidden="false" class="skill-panel active" id="panel-development" role="tabpanel">
+        <div class="skill-card console-panel"><div class="name">C#</div><span class="lvl">Hands-on</span><small>Desktop application development</small></div>
+        <div class="skill-card console-panel"><div class="name">Java</div><span class="lvl">Hands-on</span><small>Server-side project work</small></div>
+        <div class="skill-card console-panel"><div class="name">JavaScript</div><span class="lvl">Hands-on</span><small>DOM, interactions, UI behavior</small></div>
+        <div class="skill-card console-panel"><div class="name">Windows Forms</div><span class="lvl">Hands-on</span><small>Desktop interfaces and workflows</small></div>
+        <div class="skill-card console-panel"><div class="name">Git &amp; GitHub</div><span class="lvl">Hands-on</span><small>Version control and collaboration</small></div>
+        <div class="skill-card console-panel"><div class="name">Debugging &amp; Troubleshooting</div><span class="lvl">Hands-on</span><small>Application and server issues</small></div>
+        <div class="skill-card console-panel"><div class="name">Minecraft Server Development</div><span class="lvl">Hands-on</span><small>Configuration, plugins, mods</small></div>
+        <div class="skill-card console-panel"><div class="name">SQL</div><span class="lvl lvl-alt">Coursework</span><small>Relational data fundamentals</small></div>
+      </div>
+      <div aria-hidden="true" class="skill-panel" id="panel-networking" role="tabpanel">
+        <div class="skill-card console-panel"><div class="name">Data Communication Fundamentals</div><span class="lvl lvl-alt">Coursework</span><small>Core networking concepts</small></div>
+        <div class="skill-card console-panel"><div class="name">IPv4 &amp; IPv6 Addressing</div><span class="lvl lvl-alt">Coursework</span><small>Addressing fundamentals</small></div>
+        <div class="skill-card console-panel"><div class="name">Subnetting</div><span class="lvl lvl-alt">Coursework</span><small>Network addressing exercises</small></div>
+        <div class="skill-card console-panel"><div class="name">Cisco Packet Tracer</div><span class="lvl lvl-alt">Coursework</span><small>Network simulation practice</small></div>
+      </div>
+      <div aria-hidden="true" class="skill-panel" id="panel-database" role="tabpanel">
+        <div class="skill-card console-panel"><div class="name">SQL &amp; Relational Design</div><span class="lvl lvl-alt">Coursework</span><small>Schema and query fundamentals</small></div>
+        <div class="skill-card console-panel"><div class="name">SQLite</div><span class="lvl">Hands-on</span><small>Local application database</small></div>
+        <div class="skill-card console-panel"><div class="name">MySQL</div><span class="lvl">Hands-on</span><small>Database exercises and use</small></div>
+        <div class="skill-card console-panel"><div class="name">Information Management</div><span class="lvl lvl-alt">Coursework</span><small>Data organization concepts</small></div>
+      </div>
+      <div aria-hidden="true" class="skill-panel" id="panel-web" role="tabpanel">
+        <div class="skill-card console-panel"><div class="name">HTML5</div><span class="lvl">Hands-on</span><small>Semantic page structure</small></div>
+        <div class="skill-card console-panel"><div class="name">CSS3 &amp; Responsive Design</div><span class="lvl">Hands-on</span><small>Layouts, components, themes</small></div>
+        <div class="skill-card console-panel"><div class="name">JavaScript — DOM &amp; Interactivity</div><span class="lvl">Hands-on</span><small>UI state and interactions</small></div>
+        <div class="skill-card console-panel"><div class="name">Accessibility Foundations</div><span class="lvl">Hands-on</span><small>Focus, ARIA, reduced motion</small></div>
+      </div>
+      <div aria-hidden="true" class="skill-panel" id="panel-creative" role="tabpanel">
+        <div class="skill-card console-panel"><div class="name">Graphic Design</div><span class="lvl lvl-alt">Learning</span><small>Visual exploration</small></div>
+        <div class="skill-card console-panel"><div class="name">Content Creation</div><span class="lvl lvl-alt">Learning</span><small>Creative media practice</small></div>
+        <div class="skill-card console-panel"><div class="name">Visual Layout &amp; Composition</div><span class="lvl lvl-alt">Learning</span><small>Hierarchy and composition</small></div>
+      </div>
+    </div>
+  </div></section>
 </main>
-<!-- ==========================================
-       JAVASCRIPT
-       ========================================== -->
-<script src="js/script.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/v2.js"></script>
 </body>
 </html>

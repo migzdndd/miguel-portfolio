@@ -1,484 +1,142 @@
 <!DOCTYPE html>
-
 <html data-theme="dark" lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
-    <title>
-        Miguel Riovaldez — Projects
-    </title>
-    <meta content="Projects by Miguel Riovaldez, including software development, Hytale and Minecraft server development."
-        name="description" />
-    <meta content="Miguel Riovaldez — Projects" property="og:title" />
-    <meta
-        content="A collection of projects involving software development, server development, databases, and web technologies."
-        property="og:description" />
-    <meta content="website" property="og:type" />
-    <meta content="projects.html" property="og:url" />
-    <meta content="summary" name="twitter:card" />
-    <meta content="#3FF39B" media="(prefers-color-scheme: dark)" name="theme-color" />
-    <meta content="#F3F4F7" media="(prefers-color-scheme: light)" name="theme-color" />
-    <link href="projects.html" rel="canonical" />
-    <!-- ==========================================
-         FAVICON
-         ========================================== -->
-    <link
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306080A'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%233FF39B' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E"
-        rel="icon" />
-    <!-- ==========================================
-         FONTS
-         ========================================== -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;700&amp;display=swap"
-        rel="stylesheet" />
-    <!-- ==========================================
-         STYLES
-         ========================================== -->
-    <link href="css/style.css" rel="stylesheet" />
-    <style id="project-spacing">
-        /* Separate featured projects visually */
-        .project-feature+.project-feature {
-            margin-top: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            .project-feature+.project-feature {
-                margin-top: 2.5rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+  <title>Miguel Riovaldez — Project Case Studies</title>
+  <meta name="description" content="Project case studies by Miguel Riovaldez covering desktop software, databases, Java server development, Minecraft server systems, and responsive web development." />
+  <meta property="og:title" content="Miguel Riovaldez — Project Case Studies" />
+  <meta property="og:description" content="A closer look at what I built, the technical work involved, and the systems and tools used." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="projects.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta content="#3FF39B" media="(prefers-color-scheme: dark)" name="theme-color" />
+  <meta content="#F3F4F7" media="(prefers-color-scheme: light)" name="theme-color" />
+  <link href="projects.html" rel="canonical" />
+  <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306080A'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%233FF39B' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" rel="icon" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/v2.css" rel="stylesheet" />
 </head>
+<body class="portfolio-v2">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pageTransition"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-outline" id="cursorOutline"><span id="cursorText"></span></div>
+  <div aria-hidden="true" class="bg-glow"></div>
+  <div aria-hidden="true" class="bg-grid"></div>
+  <div aria-hidden="true" class="v2-orbit v2-orbit-a"></div>
 
-<body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div id="pageTransition"></div>
-    <!-- ==========================================
-         CUSTOM CURSOR
-         ========================================== -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-outline" id="cursorOutline">
-        <span id="cursorText"></span>
-    </div>
-    <!-- ==========================================
-         BACKGROUND
-         ========================================== -->
-    <div aria-hidden="true" class="bg-glow"></div>
-    <div aria-hidden="true" class="bg-grid"></div>
-    <!-- ==========================================
-         MOBILE NAVIGATION
-         ========================================== -->
-    <button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <!-- ==========================================
-         NAVIGATION
-         ========================================== -->
-    <nav aria-label="Primary" class="control-panel" id="controlPanel">
-        <!-- Brand -->
-        <div class="brand">
-            <a data-cursor-text="HOME" href="index.html">
-                <span>
-                    MR
-                </span>
-            </a>
-            <span aria-hidden="true" class="brand-dot"></span>
-        </div>
-        <!-- Navigation Links -->
-        <ul class="nav-list" id="navList">
-            <li>
-                <a data-cursor-text="GO" data-page-link="home" href="index.html">
-                    <span class="n">01</span>
-                    <span class="l">
-                        Home
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a data-cursor-text="GO" data-page-link="about" href="about.html">
-                    <span class="n">02</span>
-                    <span class="l">
-                        About
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a data-cursor-text="GO" data-page-link="projects" href="projects.html">
-                    <span class="n">03</span>
-                    <span class="l">
-                        Projects
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a data-cursor-text="GO" data-page-link="skills" href="skills.html">
-                    <span class="n">04</span>
-                    <span class="l">
-                        Skills
-                    </span>
-                </a>
-            </li>
+  <button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
 
-            <li>
-                <a data-cursor-text="GO" data-page-link="accomplishments" href="accomplishments.html">
-                    <span class="n">05</span>
-                    <span class="l">
-                        Accomplishments
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a data-cursor-text="GO" data-page-link="beyond" href="beyond.html">
-                    <span class="n">06</span>
-                    <span class="l">
-                        Beyond
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a data-cursor-text="GO" data-page-link="contact" href="contact.html">
-                    <span class="n">07</span>
-                    <span class="l">
-                        Contact
-                    </span>
-                </a>
-            </li>
-        </ul>
-        <!-- Navigation Footer -->
-        <div class="nav-foot">
-            <span class="loc">
-                PH · MNL
-            </span>
-            <button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">
-                ◐
-            </button>
-        </div>
-    </nav>
-    <!-- ==========================================
-         PROJECTS PAGE
-         ========================================== -->
-    <main class="page-content" id="main-content" tabindex="-1">
-        <section class="standalone-page" data-page="projects">
-            <div class="page-inner">
-                <!-- ======================================
-                     PAGE HEADER
-                     ====================================== -->
-                <div class="page-head">
-                    <p class="eyebrow">03 / Projects</p>
-                    <h1>
-                        What I've built.
-                    </h1>
-                </div>
-                <!-- ======================================
-                     PROJECT 01
-                     MFC YOUTH AREA MANAGEMENT SYSTEM
-                     ====================================== -->
-                <article aria-label="Open MFC Youth Area Management System project details"
-                    class="project-feature magnetic console-panel" data-project-id="mfc-youth" data-project-clickable="true"
-                    tabindex="0">
-                    <!-- Project Header -->
-                    <div class="pf-top">
-                        <span class="pf-status">
-                            <span aria-hidden="true" class="dot"></span>
+  <nav aria-label="Primary" class="control-panel" id="controlPanel">
+    <div class="brand"><a data-cursor-text="HOME" href="index.html"><span>MR</span></a><span aria-hidden="true" class="brand-dot"></span></div>
+    <ul class="nav-list" id="navList">
+      <li><a data-cursor-text="GO" data-page-link="home" href="index.html"><span class="n">01</span><span class="l">Home</span></a></li>
+      <li><a data-cursor-text="GO" data-page-link="about" href="about.html"><span class="n">02</span><span class="l">About</span></a></li>
+      <li><a data-cursor-text="GO" data-page-link="projects" href="projects.html"><span class="n">03</span><span class="l">Projects</span></a></li>
+      <li><a data-cursor-text="GO" data-page-link="skills" href="skills.html"><span class="n">04</span><span class="l">Skills</span></a></li>
+      <li><a data-cursor-text="GO" data-page-link="accomplishments" href="accomplishments.html"><span class="n">05</span><span class="l">Accomplishments</span></a></li>
+      <li><a data-cursor-text="GO" data-page-link="beyond" href="beyond.html"><span class="n">06</span><span class="l">Beyond</span></a></li>
+      <li><a data-cursor-text="GO" data-page-link="contact" href="contact.html"><span class="n">07</span><span class="l">Contact</span></a></li>
+    </ul>
+    <div class="nav-foot"><span class="loc">PH · MNL</span><button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">◐</button></div>
+  </nav>
 
-                            Completed · Software Development
+  <main class="page-content" id="main-content" tabindex="-1">
+    <section class="standalone-page v2-projects-page" data-page="projects">
+      <div class="page-inner">
+        <header class="page-head v2-projects-head page-reveal">
+          <p class="eyebrow">03 / Projects / Case Studies</p>
+          <h1>Systems I’ve built.</h1>
+          <p class="v2-page-lede">Not just a gallery. Each project records the problem, the technical work, the tools involved, and what the build demonstrates.</p>
+          <div class="v2-project-metrics" aria-label="Project summary">
+            <div><strong>04</strong><span>documented projects</span></div>
+            <div><strong>03</strong><span>development domains</span></div>
+            <div><strong>01</strong><span>active build</span></div>
+          </div>
+        </header>
 
-                        </span>
-                        <span class="tag tag-static">
-                            01 / 04
-                        </span>
-                    </div>
-                    <!-- Project Title -->
-                    <h3 class="pf-title">
-
-                        MFC Youth Area<br />
-
-                        Management System
-
-                    </h3>
-                    <!-- Project Description -->
-                    <p class="pf-desc">
-
-                        An offline desktop application designed to help
-                        Missionary Families of Christ (MFC) Youth areas
-                        efficiently manage members, chapters, and service
-                        assignments through a centralized local database.
-
-                    </p>
-                    <!-- Technologies -->
-                    <div class="pf-tags">
-                        <span class="tag">
-                            C#
-                        </span>
-                        <span class="tag">
-                            Windows Forms
-                        </span>
-                        <span class="tag">
-                            SQLite
-                        </span>
-                        <span class="tag">
-                            Git
-                        </span>
-                        <span class="tag">
-                            GitHub
-                        </span>
-                        <span class="tag">
-                            Inno Setup
-                        </span>
-                    </div>
-                    <!-- Project Actions -->
-                    <div class="pf-actions">
-                        <button class="btn btn-primary magnetic" data-cursor-text="OPEN" data-project-open="mfc-youth"
-                            type="button">
-
-                            View Project
-
-                            <span class="arrow">
-                                →
-                            </span>
-                        </button>
-                        <a class="btn btn-ghost magnetic" data-cursor-text="OPEN"
-                            href="https://github.com/migzdndd/MFC-Youth-Area-Management-System"
-                            rel="noopener noreferrer" target="_blank">
-
-                            GitHub ↗
-
-                        </a>
-                    </div>
-                </article>
-                <!-- ======================================
-                     PROJECT 02
-                     MYTALE ASIA
-                     ====================================== -->
-                <article aria-label="Open MyTale Asia Hytale Development project details" class="project-feature console-panel"
-                    data-project-id="mytale-asia" data-project-clickable="true" tabindex="0">
-                    <!-- Project Header -->
-                    <div class="pf-top">
-                        <span class="pf-status">
-                            <span aria-hidden="true" class="dot"></span>
-
-                            Completed · Server Development
-
-                        </span>
-                        <span class="tag tag-static">
-                            02 / 04
-                        </span>
-                    </div>
-                    <!-- Project Title -->
-                    <h3 class="pf-title">
-
-                        MyTale Asia<br />
-
-                        Hytale Development
-
-                    </h3>
-                    <!-- Project Description -->
-                    <p class="pf-desc">
-
-                        Hytale server development project for MyTale Asia,
-                        involving server-side development, mods, plugins,
-                        configuration, and ongoing maintenance using Java,
-                        Git, and GitHub.
-
-                    </p>
-                    <!-- Technologies -->
-                    <div class="pf-tags">
-                        <span class="tag">
-                            Java
-                        </span>
-                        <span class="tag">
-                            Git
-                        </span>
-                        <span class="tag">
-                            GitHub
-                        </span>
-                        <span class="tag">
-                            OpenAI
-                        </span>
-                    </div>
-                    <!-- Project Actions -->
-                    <div class="pf-actions">
-                        <button class="btn btn-primary magnetic" data-cursor-text="OPEN" data-project-open="mytale-asia"
-                            type="button">View Project <span class="arrow">→</span></button>
-                        <a class="btn btn-ghost magnetic" data-cursor-text="OPEN"
-                            href="https://github.com/Xerain556/MyTale-Asia-Development" rel="noopener noreferrer"
-                            target="_blank">
-
-                            GitHub ↗
-
-                        </a>
-                    </div>
-                </article>
-                <!-- ======================================
-                     PROJECT 03
-                     BITMON SMP
-                     ====================================== -->
-                <article aria-label="Open BitMon SMP project details" class="project-feature console-panel"
-                    data-project-id="bitmon-smp" data-project-clickable="true" tabindex="0">
-                    <!-- Project Header -->
-                    <div class="pf-top">
-                        <span class="pf-status">
-                            <span aria-hidden="true" class="dot"></span>
-
-                            Ongoing · Minecraft Server Development
-
-                        </span>
-                        <span class="tag tag-static">
-                            03 / 04
-                        </span>
-                    </div>
-                    <!-- Project Title -->
-                    <h3 class="pf-title">
-
-                        BitMon SMP<br />
-
-                        Cobblemon Survival Server
-
-                    </h3>
-                    <!-- Project Description -->
-                    <p class="pf-desc">
-
-                        A Cobblemon-themed Minecraft Survival Multiplayer server
-                        that blends traditional survival gameplay with
-                        Pokémon-inspired creature collecting and training. As an
-                        Assistant Developer, I help build and improve server
-                        features, configure and maintain server systems,
-                        troubleshoot technical issues, and support plugin and
-                        mod integration for the multiplayer experience.
-
-                    </p>
-                    <!-- Technologies -->
-                    <div class="pf-tags">
-                        <span class="tag">
-                            Java
-                        </span>
-                        <span class="tag">
-                            Minecraft Server Development
-                        </span>
-                        <span class="tag">
-                            Cobblemon
-                        </span>
-                        <span class="tag">
-                            Server Configuration
-                        </span>
-                        <span class="tag">
-                            Mod/Plugin Integration
-                        </span>
-                        <span class="tag">
-                            Git
-                        </span>
-                        <span class="tag">
-                            GitHub
-                        </span>
-                        <span class="tag">
-                            Debugging &amp; Troubleshooting
-                        </span>
-                    </div>
-                    <!-- Project Actions -->
-                    <div class="pf-actions">
-                        <button class="btn btn-primary magnetic" data-cursor-text="OPEN" data-project-open="bitmon-smp"
-                            type="button">
-
-                            View Project
-
-                            <span class="arrow">
-                                →
-                            </span>
-                        </button>
-                    </div>
-                </article>
-                <!-- ======================================
-                     PROJECT 04
-                     THIS WEBPAGE
-                     ====================================== -->
-                <article aria-label="Open This Webpage portfolio project details" class="project-feature console-panel"
-                    data-project-id="this-webpage" data-project-clickable="true" tabindex="0">
-                    <div class="pf-top">
-                        <span class="pf-status">
-                            <span aria-hidden="true" class="dot"></span>
-
-                            Completed · Web Development
-
-                        </span>
-                        <span class="tag tag-static">
-                            04 / 04
-                        </span>
-                    </div>
-                    <h3 class="pf-title">
-
-                        This Webpage<br />
-
-                        Portfolio Website
-
-                    </h3>
-                    <p class="pf-desc">
-
-                        The site you're on right now — a responsive,
-                        multi-page portfolio built from scratch to bring
-                        my projects, skills, and interests together in
-                        one place, complete with theming, page transitions,
-                        and a few small interactive details along the way.
-
-                    </p>
-                    <div class="pf-tags">
-                        <span class="tag">HTML5</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Google Fonts</span>
-                        <span class="tag">Responsive Design</span>
-                        <span class="tag">LocalStorage</span>
-                    </div>
-                    <div class="pf-actions">
-                        <button class="btn btn-primary magnetic" data-cursor-text="OPEN"
-                            data-project-open="this-webpage" type="button">
-
-                            View Project
-
-                            <span class="arrow">
-                                →
-                            </span>
-                        </button>
-                        <a class="btn btn-ghost magnetic" data-cursor-text="OPEN" href="index.html"
-                            rel="noopener noreferrer" target="_blank">
-
-                            View Website ↗
-
-                        </a>
-                    </div>
-                </article>
-                <!-- ======================================
-                     PROJECT NOTE
-                     ====================================== -->
-                <p class="projects-note">
-
-                    Four projects so far — more will land here
-                    as they're finished.
-
-                </p>
+        <div class="v2-case-list">
+          <article id="mfc-youth" class="v2-case console-panel page-reveal" data-v2-project="mfc-youth" tabindex="0" aria-label="Open MFC Youth Area Management System case study">
+            <div class="v2-case-rail"><span>01</span><span>COMPLETED</span></div>
+            <div class="v2-case-main">
+              <div class="v2-case-top"><p class="v2-project-type">Software Development · Local Database</p><span class="v2-project-status"><span class="dot"></span> Shipped</span></div>
+              <h2>MFC Youth Area<br />Management System</h2>
+              <p class="v2-case-summary">An offline desktop application for managing members, chapters, and service assignments through a centralized local database.</p>
+              <div class="pf-tags"><span class="tag">C#</span><span class="tag">Windows Forms</span><span class="tag">SQLite</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Inno Setup</span></div>
+              <div class="v2-case-proof"><span><b>Focus</b> Data management workflow</span><span><b>Delivery</b> Offline desktop application</span></div>
+              <div class="pf-actions">
+                <button class="btn btn-primary magnetic" data-v2-open="mfc-youth" type="button">Open Case Study <span class="arrow">→</span></button>
+                <a class="btn btn-ghost magnetic" href="https://github.com/migzdndd/MFC-Youth-Area-Management-System" rel="noopener noreferrer" target="_blank">GitHub ↗</a>
+              </div>
             </div>
-        </section>
-    </main>
-    <!-- ==========================================
-         PROJECT DETAILS MODAL
-         ========================================== -->
-    <div aria-hidden="true" aria-label="Project details" aria-modal="true" class="modal-overlay" id="projectModal"
-        role="dialog">
-        <div class="modal-panel"><button aria-label="Close project details" class="modal-close" data-cursor-text="CLOSE"
-                id="modalClose">
-                ✕
-            </button>
-            <h3 id="projectModalTitle"></h3>
-            <div id="projectModalBody"></div>
-        </div>
-    </div>
-    <!-- ==========================================
-         JAVASCRIPT
-         ========================================== -->
-    <script src="js/script.js"></script>
-</body>
+          </article>
 
+          <article id="mytale-asia" class="v2-case console-panel page-reveal" data-v2-project="mytale-asia" tabindex="0" aria-label="Open MyTale Asia Hytale Development case study">
+            <div class="v2-case-rail"><span>02</span><span>COMPLETED</span></div>
+            <div class="v2-case-main">
+              <div class="v2-case-top"><p class="v2-project-type">Server Development · Java</p><span class="v2-project-status"><span class="dot"></span> Completed</span></div>
+              <h2>MyTale Asia<br />Hytale Development</h2>
+              <p class="v2-case-summary">Server-side development involving mods, plugins, configuration, maintenance, and version-controlled collaboration.</p>
+              <div class="pf-tags"><span class="tag">Java</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">OpenAI</span></div>
+              <div class="v2-case-proof"><span><b>Focus</b> Server-side systems</span><span><b>Workflow</b> Git-based development</span></div>
+              <div class="pf-actions">
+                <button class="btn btn-primary magnetic" data-v2-open="mytale-asia" type="button">Open Case Study <span class="arrow">→</span></button>
+                <a class="btn btn-ghost magnetic" href="https://github.com/Xerain556/MyTale-Asia-Development" rel="noopener noreferrer" target="_blank">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article id="bitmon-smp" class="v2-case console-panel page-reveal" data-v2-project="bitmon-smp" tabindex="0" aria-label="Open BitMon SMP case study">
+            <div class="v2-case-rail"><span>03</span><span>ONGOING</span></div>
+            <div class="v2-case-main">
+              <div class="v2-case-top"><p class="v2-project-type">Minecraft Server Development · Operations</p><span class="v2-project-status ongoing"><span class="dot"></span> Active</span></div>
+              <h2>BitMon SMP<br />Cobblemon Survival Server</h2>
+              <p class="v2-case-summary">Assistant Developer work across server features, system configuration, technical troubleshooting, and plugin/mod integration for a multiplayer environment.</p>
+              <div class="pf-tags"><span class="tag">Java</span><span class="tag">Server Configuration</span><span class="tag">Cobblemon</span><span class="tag">Mod/Plugin Integration</span><span class="tag">Git</span><span class="tag">Debugging</span></div>
+              <div class="v2-case-proof"><span><b>Role</b> Assistant Developer</span><span><b>Focus</b> Reliability &amp; integration</span></div>
+              <div class="pf-actions"><button class="btn btn-primary magnetic" data-v2-open="bitmon-smp" type="button">Open Case Study <span class="arrow">→</span></button></div>
+            </div>
+          </article>
+
+          <article id="this-webpage" class="v2-case console-panel page-reveal" data-v2-project="this-webpage" tabindex="0" aria-label="Open Portfolio Website case study">
+            <div class="v2-case-rail"><span>04</span><span>COMPLETED</span></div>
+            <div class="v2-case-main">
+              <div class="v2-case-top"><p class="v2-project-type">Web Development · Portfolio System</p><span class="v2-project-status"><span class="dot"></span> Live build</span></div>
+              <h2>This Webpage<br />Portfolio Website</h2>
+              <p class="v2-case-summary">A responsive multi-page portfolio built from scratch with theming, page transitions, custom interactions, accessibility considerations, and a reusable visual system.</p>
+              <div class="pf-tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Responsive Design</span><span class="tag">LocalStorage</span><span class="tag">Accessibility</span></div>
+              <div class="v2-case-proof"><span><b>Focus</b> UI system &amp; interaction</span><span><b>Approach</b> Built without a framework</span></div>
+              <div class="pf-actions">
+                <button class="btn btn-primary magnetic" data-v2-open="this-webpage" type="button">Open Case Study <span class="arrow">→</span></button>
+                <a class="btn btn-ghost magnetic" href="index.html">View Website ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="v2-project-end page-reveal">
+          <span>BUILD_LOG //</span>
+          <p>More projects will be documented here as they move from experiments to working systems.</p>
+          <a href="contact.html">Start a conversation <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay v2-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <div class="modal-panel console-panel" role="document">
+      <button class="modal-close" type="button" aria-label="Close project case study">×</button>
+      <div class="v2-modal-topline"><span>PROJECT_CASE_STUDY</span><span id="v2ModalIndex">01 / 04</span></div>
+      <h2 id="projectModalTitle"></h2>
+      <div id="projectModalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/v2.js"></script>
+</body>
 </html>

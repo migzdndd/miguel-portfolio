@@ -1,230 +1,85 @@
 <!DOCTYPE html>
-
 <html data-theme="dark" lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<title>Miguel Riovaldez — About</title>
-<meta content="About Miguel Riovaldez — BSIT student at Mapúa University aspiring to become a Full Stack Developer." name="description"/>
-<meta content="Miguel Riovaldez — About" property="og:title"/>
-<meta content="Learn more about Miguel Riovaldez, his studies, interests, and goals in software development." property="og:description"/>
-<meta content="website" property="og:type"/>
-<meta content="about.html" property="og:url"/>
-<meta content="summary" name="twitter:card"/>
-<meta content="#3FF39B" media="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="#F3F4F7" media="(prefers-color-scheme: light)" name="theme-color"/>
-<link href="about.html" rel="canonical"/>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306080A'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%233FF39B' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" rel="icon"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+  <title>Miguel Riovaldez — About</title>
+  <meta name="description" content="About Miguel Riovaldez — BSIT student at Mapúa University building software, server systems, databases, networks, and web projects." />
+  <meta property="og:title" content="Miguel Riovaldez — About" />
+  <meta property="og:description" content="About Miguel Riovaldez — BSIT student at Mapúa University building software, server systems, databases, networks, and web projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="about.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta content="#3FF39B" media="(prefers-color-scheme: dark)" name="theme-color" />
+  <meta content="#F3F4F7" media="(prefers-color-scheme: light)" name="theme-color" />
+  <link href="about.html" rel="canonical" />
+  <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306080A'/%3E%3Ctext x='50' y='64' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='44' fill='%233FF39B' text-anchor='middle'%3EMR%3C/text%3E%3C/svg%3E" rel="icon" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/v2.css" rel="stylesheet" />
+  
 </head>
-<body>
-<a class="skip-link" href="#main-content">Skip to main content</a>
-<div id="pageTransition"></div>
-<!-- ==========================================
-       CUSTOM CURSOR
-       ========================================== -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-outline" id="cursorOutline">
-<span id="cursorText"></span>
-</div>
-<!-- ==========================================
-       BACKGROUND
-       ========================================== -->
-<div aria-hidden="true" class="bg-glow"></div>
-<div aria-hidden="true" class="bg-grid"></div>
-<!-- ==========================================
-       MOBILE NAVIGATION
-       ========================================== -->
-<button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle">
-<span></span>
-<span></span>
-<span></span>
-</button>
-<!-- ==========================================
-       NAVIGATION
-       ========================================== -->
-<nav aria-label="Primary" class="control-panel" id="controlPanel">
-<div class="brand">
-<a href="index.html">
-<span>MR</span>
-</a>
-<span aria-hidden="true" class="brand-dot"></span>
-</div>
-<ul class="nav-list" id="navList">
-<li>
-<a data-page-link="home" href="index.html">
-<span class="n">01</span>
-<span class="l">Home</span>
-</a>
-</li>
-<li>
-<a data-page-link="about" href="about.html">
-<span class="n">02</span>
-<span class="l">About</span>
-</a>
-</li>
-<li>
-<a data-page-link="projects" href="projects.html">
-<span class="n">03</span>
-<span class="l">Projects</span>
-</a>
-</li>
-<li>
-<a data-page-link="skills" href="skills.html">
-<span class="n">04</span>
-<span class="l">Skills</span>
-</a>
-</li>
+<body class="portfolio-v2">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pageTransition"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-outline" id="cursorOutline"><span id="cursorText"></span></div>
+  <div aria-hidden="true" class="bg-glow"></div>
+  <div aria-hidden="true" class="bg-grid"></div>
+  <div aria-hidden="true" class="v2-orbit v2-orbit-a"></div>
+  <button aria-expanded="false" aria-label="Open navigation" class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+  <nav aria-label="Primary" class="control-panel" id="controlPanel">
+    <div class="brand"><a data-cursor-text="HOME" href="index.html"><span>MR</span></a><span aria-hidden="true" class="brand-dot"></span></div>
+    <ul class="nav-list" id="navList"><li><a data-cursor-text="GO" data-page-link="home" href="index.html"><span class="n">01</span><span class="l">Home</span></a></li><li><a data-cursor-text="GO" data-page-link="about" href="about.html"><span class="n">02</span><span class="l">About</span></a></li><li><a data-cursor-text="GO" data-page-link="projects" href="projects.html"><span class="n">03</span><span class="l">Projects</span></a></li><li><a data-cursor-text="GO" data-page-link="skills" href="skills.html"><span class="n">04</span><span class="l">Skills</span></a></li><li><a data-cursor-text="GO" data-page-link="accomplishments" href="accomplishments.html"><span class="n">05</span><span class="l">Accomplishments</span></a></li><li><a data-cursor-text="GO" data-page-link="beyond" href="beyond.html"><span class="n">06</span><span class="l">Beyond</span></a></li><li><a data-cursor-text="GO" data-page-link="contact" href="contact.html"><span class="n">07</span><span class="l">Contact</span></a></li></ul>
+    <div class="nav-foot"><span class="loc">PH · MNL</span><button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">◐</button></div>
+  </nav>
+  <main class="page-content" id="main-content" tabindex="-1">
+  <section class="standalone-page v2-about-page" data-page="about"><div class="page-inner">
+    <header class="page-head v2-editorial-head page-reveal">
+      <p class="eyebrow">02 / About / Profile</p>
+      <h1>Builder first.<br />Student always.</h1>
+      <p class="v2-page-lede">I’m Miguel Riovaldez, a BS Information Technology student at Mapúa University in the Philippines. I learn best by turning concepts into working software, server systems, databases, and web experiences.</p>
+    </header>
 
-<li>
-<a data-page-link="accomplishments" href="accomplishments.html">
-<span class="n">05</span>
-<span class="l">Accomplishments</span>
-</a>
-</li>
-<li>
-<a data-page-link="beyond" href="beyond.html">
-<span class="n">06</span>
-<span class="l">Beyond</span>
-</a>
-</li>
-<li>
-<a data-page-link="contact" href="contact.html">
-<span class="n">07</span>
-<span class="l">Contact</span>
-</a>
-</li>
-</ul>
-<div class="nav-foot">
-<span class="loc">
-        PH · MNL
-      </span>
-<button aria-label="Toggle light and dark theme" class="theme-toggle" id="themeToggle">
-        ◐
-      </button>
-</div>
-</nav>
-<!-- ==========================================
-       ABOUT PAGE
-       ========================================== -->
-<main class="page-content" id="main-content" tabindex="-1">
-<section class="standalone-page" data-page="about">
-<div class="page-inner">
-<!-- Page Header -->
-<div class="page-head">
-<p class="eyebrow">02 / About</p>
-<h1>
-            Who I am.
-          </h1>
-</div>
-<!-- About Content -->
-<div class="about-grid">
-<!-- About Description -->
-<div class="about-copy">
-<p>
-              I'm Miguel Riovaldez, 22, a 2nd Year Information Technology
-              student at Mapúa University in the Philippines, working
-              toward becoming a Full Stack Developer. This site is part of
-              that process — a place to document what I'm building and
-              learning as I go, rather than a polished résumé.
-            </p>
-<p>
-              Coursework has me getting hands-on with software development
-              and networking fundamentals, while I pick up web technologies
-              on the side through personal projects. Outside of class, I
-              spend my free time gaming, playing guitar, and messing around
-              with content creation and graphic design.
-            </p>
-<p>
-              I'm not presenting myself as a finished professional —
-              I'm a student building real things, one project at a time,
-              and getting a little better with each one.
-            </p>
-<!-- Learning Areas -->
-<div class="learning-list">
-<span class="tag">
-                Software Development
-              </span>
-<span class="tag">
-                Networking Fundamentals
-              </span>
-<span class="tag">
-                Web Technologies
-              </span>
-<span class="tag">
-                Creative Tools
-              </span>
-</div>
-</div>
-<!-- Personal Facts -->
-<div class="fact-list console-panel">
-<div class="fact-row">
-<span class="k">
-                Name
-              </span>
-<span class="v">
-                Miguel Riovaldez
-              </span>
-</div>
-<div class="fact-row">
-<span class="k">
-                Age
-              </span>
-<span class="v">
-                22
-              </span>
-</div>
-<div class="fact-row">
-<span class="k">
-                Location
-              </span>
-<span class="v">
-                Philippines
-              </span>
-</div>
-<div class="fact-row">
-<span class="k">
-                University
-              </span>
-<span class="v">
-                Mapúa University
-              </span>
-</div>
-<div class="fact-row">
-<span class="k">
-                Program
-              </span>
-<span class="v">
-                BS Information Technology
-              </span>
-</div>
-<div class="fact-row">
-<span class="k">
-                Year
-              </span>
-<span class="v">
-                2nd Year
-              </span>
-</div>
-<div class="fact-row">
-<span class="k">
-                Goal
-              </span>
-<span class="v">
-                Full Stack Developer
-              </span>
-</div>
-</div>
-</div>
-</div>
-</section>
+    <div class="v2-about-layout">
+      <section class="v2-about-story page-reveal">
+        <p class="v2-dropcopy">My coursework gives me the fundamentals—software development, databases, computer systems, and networking. Personal and collaborative projects are where I pressure-test those fundamentals and learn how the pieces behave outside an exercise.</p>
+        <p>I’ve built a Windows desktop application backed by SQLite, worked on Java-based server development and configuration, supported a modded multiplayer server, and designed this portfolio from scratch with vanilla web technologies.</p>
+        <p>I’m working toward full-stack development, but I’m equally interested in the systems around an application: data, infrastructure, deployment thinking, debugging, and the details that make a build usable.</p>
+        <div class="learning-list v2-learning-list"><span class="tag">Software Development</span><span class="tag">Server Systems</span><span class="tag">Databases</span><span class="tag">Networking</span><span class="tag">Web Development</span><span class="tag">Creative Tools</span></div>
+      </section>
+
+      <aside class="v2-profile-stack page-reveal">
+        <div class="v2-profile-card console-panel">
+          <div class="v2-panel-head"><span>PROFILE.SYS</span><span>ACTIVE</span></div>
+          <dl class="v2-profile-facts">
+            <div><dt>Name</dt><dd>Miguel Riovaldez</dd></div>
+            <div><dt>Age</dt><dd>22</dd></div>
+            <div><dt>Location</dt><dd>Philippines</dd></div>
+            <div><dt>University</dt><dd>Mapúa University</dd></div>
+            <div><dt>Program</dt><dd>BS Information Technology</dd></div>
+            <div><dt>Year</dt><dd>2nd Year</dd></div>
+            <div><dt>Direction</dt><dd>Full Stack Development</dd></div>
+          </dl>
+        </div>
+        <div class="v2-principle console-panel"><span>OPERATING PRINCIPLE</span><strong>Learn the concept. Build the system. Break it. Fix it. Document it.</strong></div>
+      </aside>
+    </div>
+
+    <section class="v2-path page-reveal" aria-labelledby="path-title">
+      <div class="v2-section-head"><div><p class="eyebrow">Working Method</p><h2 id="path-title">How I develop capability.</h2></div></div>
+      <div class="v2-path-grid">
+        <article><span>01</span><h3>Understand</h3><p>Start with the fundamentals from coursework, documentation, and existing systems.</p></article>
+        <article><span>02</span><h3>Build</h3><p>Turn theory into a concrete application, configuration, feature, or interface.</p></article>
+        <article><span>03</span><h3>Troubleshoot</h3><p>Use failures and edge cases to understand how the system really behaves.</p></article>
+        <article><span>04</span><h3>Iterate</h3><p>Refine the workflow, the code, and the presentation based on what the build revealed.</p></article>
+      </div>
+    </section>
+  </div></section>
 </main>
-<!-- ==========================================
-       JAVASCRIPT
-       ========================================== -->
-<script src="js/script.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/v2.js"></script>
 </body>
 </html>
