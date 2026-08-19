@@ -1134,7 +1134,7 @@ img {
   from {
 
     transform:
-      translateX(0);
+      translateX(-100%);
 
   }
 
@@ -3479,10 +3479,9 @@ body.cursor-enabled:not(.touch) * {
   opacity: 1;
 
   transform:
-    translateX(0);
+    translateX(-100%);
 
 }
-
 
 /* =========================================================
    PAGE TRANSITIONS
@@ -3517,8 +3516,14 @@ body.cursor-enabled:not(.touch) * {
       #062408 36%,
       #000000 76%);
 
+  /*
+   * Hidden by default.
+   * This prevents the transition overlay
+   * from blocking the site if JavaScript
+   * fails to initialize.
+   */
   transform:
-    translateX(0);
+    translateX(-100%);
 
   will-change:
     transform;
@@ -3645,7 +3650,7 @@ body.page-leaving .page-content {
   to {
 
     transform:
-      translateX(0);
+      translateX(-100%);
 
   }
 
@@ -3694,7 +3699,6 @@ body.page-leaving .page-content {
   }
 
 }
-
 
 /* =========================================================
    SEQUENTIAL PAGE REVEAL
